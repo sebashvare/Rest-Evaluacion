@@ -51,3 +51,23 @@ class Evaluacion(models.Model):
 
     def __unicode__(self):
         return
+
+class Backlog(models.Model):
+    """
+        Este modelo hace referencia a las alertas que llegan de cualquier fuente que no se una OT.
+    """
+    fecha = models.DateTimeField(auto_now_add=True)
+    fuente = models.CharField(("Quien reporta"), max_length=50)
+    reporte = models.CharField(("Que reporta"), max_length=250)
+    id_punto_servicio = models.CharField(("ID Punto Servicio"), max_length=15)
+    ejecucion = models.CharField(("Quien ejecuta la actividad"), max_length=200)
+    estado = models.CharField(("Estado Alerta"), max_length=50)
+    responsable = models.CharField(("Quien Resuelve"), max_length=200)
+       
+    
+    def __str__(self):
+        return "{}-{}".format(str(self.id_punto_servicio), str(self.ejecucion))
+
+    class Meta:
+        verbose_name = 'Backlog'
+        verbose_name_plural = 'Backlog'

@@ -1,0 +1,71 @@
+{% extends 'base.html' %} 
+{% block title %} Programador Medida | Evaluacion {% endblock %}
+{% block content%}
+<div class="container-fluid">
+  <h6 class="text-dark text-gray-600 text-uppercase">Programador Medida</h6>
+  <small class="form-text1">Rol: Registra la OT en el sistema</small>
+  <div class="card shadow mt-1">
+    <div class="card-header py-3">
+      <p class="text-primary m-0 text-gray-600 text-uppercase">Informacion Planeacion</p>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col prueba">
+          <div class="input-group mt-2">
+            <input
+              class="form-control form-control-sm"
+              type="number"
+              placeholder="Ingrese la ORDEN ..."
+            />
+          </div>
+          <div class="input-group mt-2">
+            <input
+              class="form-control form-control-sm"
+              type="number"
+              placeholder="ID de cuenta"
+            />
+          </div>
+          <div class="input-group mt-2">
+            <input
+              class="form-control form-control-sm"
+              type="number"
+              placeholder="Nombre de cuenta"
+            />
+          </div>
+          <div class="input-group mt-2">
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              placeholder="Fuente"
+            />
+          </div>
+          <div class="input-group mt-2">
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              placeholder="Contrata"
+            />
+          </div>    
+          <div class="input-group mt-2">
+            <select class="form-select form-select-sm">
+              <optgroup label="Tipo de actividad">
+                <option value="12">This is item 1</option>
+                <option value="13">This is item 2</option>
+                <option value="14">This is item 3</option>
+              </optgroup>
+            </select>
+          </div>
+          <small class="form-text mt-1"
+            >* Seleccione el tipo de Actividad.</small
+          >
+          <div class="input-group mt-1">
+            <button class="btn btn-primary" id="guardar-info" type="button">
+              Guardar Informacion
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
