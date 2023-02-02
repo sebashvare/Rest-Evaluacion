@@ -259,28 +259,52 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
     
     <script type="text/javascript">
+      // Variables
       let informacion_data = "";
+      let quienReporta = "";
+      let actividadEjecutar = "";
+      let id_punto_servicio = 0;
+      let fuente_reporta = "";
+      let contrata = "";
+      let quienResuelve = "";
+
+      envio_informacion = document.getElementById("guardar-info");
+      
+      // DataTable
       $(document).ready(function () {
         $('#sebastian').DataTable({
           
         });
     });
 
-    function capturar (){
-      fuente = document.getElementById("fuente");
-      fuente.disabled = true;
-      informacion_data = document.getElementById("actividadEjecutar").value;
-      
-      if (informacion_data === "Revision por alto consumo") {
-        document.getElementById("fuente").value = "CONFIABILIDAD"
-      }
-      else {
-        document.getElementById("fuente").value = ""
-        fuente.disabled = false;
-  
-      }
-           
-    };
+    // Funciones
+    
+    function habilitarButton(){
+      envio_informacion.disabled = true;
+    }
+    /*
+      Deshabilitamos el boton para enviar la informacion asi estamos seguros
+      que el formulario se lleno correctamente.
+    */
+    document.addEventListener("DOMContentLoaded", function(){
+      habilitarButton();
+    });
+
+    /*
+    Deshabilito el campo quien resuelve ya que dependiendo de la actividad a actividadEjecutar
+    esta tendra un responsable.
+    */
+    document.getElementById("quienResuelve").disabled=true;
+    document.getElementById("actividadEjecutar").onchange = function(){
+        document.getElementById("quienResuelve").value="Confiabilidad";
+    }
+
+    
+
+
+    
+    
+
     </script>
     
   </body>
