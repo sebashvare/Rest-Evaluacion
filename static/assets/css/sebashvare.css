@@ -1,0 +1,10 @@
+.contenedorBotones {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.botones {
+    display: inline-block;
+    width: 50%;
+}

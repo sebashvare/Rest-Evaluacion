@@ -12,19 +12,28 @@ class getPlaneacion(viewsets.ModelViewSet):
     queryset = Planeacion.objects.all()
     serializer_class = PlaneacionSerializer
 
+
 class getHacer(viewsets.ModelViewSet):
     queryset = Hacer.objects.all()
     serializer_class = HacerSerializer
 
+
 def listPlaneacion(request):
     listado_planeacion = Planeacion.objects.all()
-    return render(request, "planeacion/formulario_planeacion.html", {"data":listado_planeacion})
+    return render(request, "planeacion/formulario_planeacion.html", {"data": listado_planeacion})
+
 
 def list_backlog(request):
     data = Backlog.objects.all()
-    return render(request, "eventos/registro_eventos.html", {"data": data})
+    return render(request, "eventos/listar_eventos.html", {"data": data})
+
 
 def list_backlog_json(request):
     data = Backlog.objects.all()
     json = serializers.serialize('json', data)
-    return HttpResponse(json, content_type = 'application/json')
+    return HttpResponse(json, content_type='application/json')
+
+
+def registrar_eventos(request):
+
+    return render(request, "eventos/registrar_eventos.html", {})

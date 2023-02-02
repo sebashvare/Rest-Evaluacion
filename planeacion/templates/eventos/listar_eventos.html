@@ -11,12 +11,19 @@
       <p class="text-primary m-0 text-gray-600 text-uppercase">
         Listado Eventos
       </p>
+      <div class="input-group mt-1">
+        
+        <a class="btn btn-dark" href="{% url "planeacion:registrar_eventos" %}">
+          Nuevo Evento
+        </a>
+        
+      </div>
     </div>
     <div class="card-body">
       <div class="row">
         <table
           id="sebastian"
-          class="display table table-striped table-bordered"
+          class="display responsive nowrap" 
           style="width: 100%"
         >
           <thead>
@@ -28,6 +35,7 @@
               <th class="text-uppercase">Ejecucion</th>
               <th class="text-uppercase">Estado</th>
               <th class="text-uppercase">Responsable</th>
+              <th class="text-uppercase">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -40,6 +48,12 @@
               <td class = "text-capitalcase">{{ info.ejecucion }}</td>
               <td class = "text-capitalcase">{{ info.estado}}</td>
               <td class = "text-capitalcase">{{ info.responsable }}</td>
+              <td>
+                <div class="contenedorBotones">
+                  <button class="btn-dark botones">Modificar Evento</button>
+                  <button class="btn-danger botones"  type="button">Eliminar Evento</button>
+                </div>  
+              </td>
             </tr>
             {% endfor %}
           </tbody>
@@ -52,6 +66,7 @@
               <th class="text-uppercase">Ejecucion</th>
               <th class="text-uppercase">Estado</th>
               <th class="text-uppercase">Responsable</th>
+              <th class="text-uppercase">Acciones</th> 
             </tr>
           </tfoot>
         </table>

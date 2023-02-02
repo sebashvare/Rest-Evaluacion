@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome-all.min.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/Styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/sebashvare.css' %}" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     
   </head>
 
@@ -254,14 +256,31 @@
     <script src="{% static 'assets/js/theme.js'%}"></script>
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+    
     <script type="text/javascript">
+      let informacion_data = "";
       $(document).ready(function () {
         $('#sebastian').DataTable({
-            paging: false,
-            ordering: false,
-            info: false,
+          
         });
     });
+
+    function capturar (){
+      fuente = document.getElementById("fuente");
+      fuente.disabled = true;
+      informacion_data = document.getElementById("actividadEjecutar").value;
+      
+      if (informacion_data === "Revision por alto consumo") {
+        document.getElementById("fuente").value = "CONFIABILIDAD"
+      }
+      else {
+        document.getElementById("fuente").value = ""
+        fuente.disabled = false;
+  
+      }
+           
+    };
     </script>
     
   </body>

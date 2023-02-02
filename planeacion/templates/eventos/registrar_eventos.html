@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block title %}Registro Eeventos | Evalaucion {% endblock title %}
+{% block content %}
+
+<div class="container-fluid">
+    <h6 class="text-dark text-gray-600 text-uppercase">Registro Eventos</h6>
+    <small class="form-text1">Rol: Se registra eventos que por algun motivo no se genera una OT y asi se le puede llevar seguimiento del caso</small>
+    <div class="card shadow mt-1">
+      <div class="card-header py-3">
+        <p class="text-primary m-0 text-gray-600 text-uppercase">Registro Evento</p>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col prueba">
+            <div class="input-group mt-2">
+                <small>* Seleccione el tipo de actividad</small>
+            </div>
+            <div class="input-group mt-2">
+                <select class="form-select form-select-sm">
+                    <optgroup label="Tipo de actividad">
+                        <option value="Campañas Medida">Campañas Medida</option>
+                        <option value="Campañas Zona Sur">Campañas Zona Sur</option>
+                        <option value="Campañas Zona Centro">Campañas Zona Centro</option>
+                        <option value="Campañas Zona Norte">Campañas Zona Norte</option>
+                        <option value="Campañas Zona Cetsa">Campañas Zona Cetsa</option>
+                        <option value="Campañas Zona Pacifico">Campañas Zona Pacifico</option>
+                        <option value="Campañas Zona Tolima">Campañas Zona Tolima</option>
+                        <option value="CGM">CGM</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="input-group mt-2">
+                <small>* Digite ID PUNTO DE SERVICIO</small>
+            </div>
+            <div class="input-group mt-2">
+              <input
+                class="form-control form-control-sm"
+                type="number"
+                placeholder="ID Punto Servicio"
+                id="inicial"
+              />
+            </div>
+            <div class="input-group mt-2">
+                <small>* Seleccione actividad a ejecutar</small>
+            </div>
+            <div class="input-group mt-2">
+                <select id="actividadEjecutar" class="form-select form-select-sm" onchange="capturar()">
+                    <optgroup label="Tipo de actividad">
+                        <option value="Revision por alto consumo">Revision por alto consumo</option>
+                        <option value="Reprogramacion equipos de medida">Reprogramacion equipos de medida</option>
+                        <option value="Normalizar equipos y aseguramiento de la medida">Normalizar equipos y aseguramiento de la medida</option>
+                        <option value="Verificar cumplimiento de norma e instalacion del servicio">Verificar cumplimiento de norma e instalacion del servicio</option>
+                        <option value="Normalizacion comunicación y asegurar bajada de datos">Normalizacion comunicación y asegurar bajada de datos</option>
+                        <option value="Normalizacion y aseguramiento de la medida">Normalizacion y aseguramiento de la medida</option>
+                        <option value="Suspender servicio de cañuelas">Suspender servicio de cañuelas</option>
+                        <option value="Suspender servicio de poste">Suspender servicio de poste</option>
+                        <option value="Garantizar estado de la medida">Garantizar estado de la medida</option>
+                        <option value="Aseguramiento de equipo md y la informacion por siniestro">Aseguramiento de equipo md y la informacion por siniestro</option>
+                        <option value="Normalizar reporte de anomalia">Normalizar reporte de anomalia</option>
+                        <option value="Instalacion a cliente provisional">Instalacion a cliente provisional</option>
+                        <option value="Programacion a otros comercializadores">Programacion a otros comercializadores</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="input-group mt-2">
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                placeholder="Fuente"
+                id="fuente"
+              />
+            </div>
+            <div class="input-group mt-2">
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                placeholder="Contrata"
+              />
+            </div>    
+            <div class="input-group mt-2">
+              <select class="form-select form-select-sm">
+                <optgroup label="Tipo de actividad">
+                  <option value="12">This is item 1</option>
+                  <option value="13">This is item 2</option>
+                  <option value="14">This is item 3</option>
+                </optgroup>
+              </select>
+            </div>
+            <small class="form-text mt-1"
+              >* Seleccione el tipo de Actividad.</small
+            >
+            <div class="input-group mt-1">
+              <button class="btn btn-primary" id="guardar-info" type="button">
+                Guardar Informacion
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
