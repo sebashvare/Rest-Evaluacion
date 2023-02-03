@@ -1,4 +1,4 @@
-from rest_framework.response import Response
+from django.urls import reverse
 from rest_framework.decorators import api_view
 from .serializer import HacerSerializer, PlaneacionSerializer
 from rest_framework import viewsets
@@ -35,5 +35,31 @@ def list_backlog_json(request):
 
 
 def registrar_eventos(request):
-
     return render(request, "eventos/registrar_eventos.html", {})
+
+
+def save_eventos(request):
+    
+    if request.method == "POST":
+        
+        
+        quienReporta = request.POST.get("quienReporta")
+        print(quienReporta)
+        idPuntoServicio = request.POST.get("idPuntoServicio")
+        actividadEjecutar = request.POST.get("actividadEjecutar")
+        fuente = request.POST.get("fuente")
+        contrata = request.POST.get("contrata")
+        quienResuelve = request.POST.get("quienResuelve")
+
+        data = Backlog(
+            fuente=quienReporta,
+            reporte = actividadEjecutar,         
+            id_punto_servicio = idPuntoServicio,
+            ejecucion = fuente,
+            responsable = quienResuelve,
+            contrata = contrata
+        )
+        data.save()
+        data = Backlog.objects.all()
+        agregado = True
+    return render(request, "eventos/listar_eventos.html", {"data": data, "info":agregado})

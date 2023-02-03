@@ -63,11 +63,17 @@ class Backlog(models.Model):
     ejecucion = models.CharField(("Quien ejecuta la actividad"), max_length=200)
     estado = models.CharField(("Estado Alerta"), max_length=50)
     responsable = models.CharField(("Quien Resuelve"), max_length=200)
+    contrata = models.CharField(("Contratista"), max_length=200)
        
     
     def __str__(self):
         return "{}-{}".format(str(self.id_punto_servicio), str(self.ejecucion))
+    
+    def save(self, *args, **kwargs):
+        self.estado = "Pendiente"
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Backlog'
         verbose_name_plural = 'Backlog'
+    

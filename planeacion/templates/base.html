@@ -232,7 +232,7 @@
             </div>
           </nav>
          {% block content %}
-         {% endblock %}
+         {% endblock content %}
         </div>
         <footer class="bg-white sticky-footer">
           <div class="container my-auto">
@@ -260,13 +260,13 @@
     
     <script type="text/javascript">
       // Variables
-      let informacion_data = "";
-      let quienReporta = "";
-      let actividadEjecutar = "";
-      let id_punto_servicio = 0;
-      let fuente_reporta = "";
-      let contrata = "";
-      let quienResuelve = "";
+      var informacion_data = "";
+      var quienReporta = "";
+      var actividadEjecutar = "";
+      var id_punto_servicio = 0;
+      var fuente_reporta = "";
+      var contrata = "";
+      var quienResuelve = "";
 
       envio_informacion = document.getElementById("guardar-info");
       
@@ -295,17 +295,53 @@
     esta tendra un responsable.
     */
     document.getElementById("quienResuelve").disabled=true;
+    
+    // Segun la actividad a ejecutar seleccionamos la el grupo encargado para que ejecute la actividad, por defecto confiiabilidad debe enterarse de la avctividad.
+    
     document.getElementById("actividadEjecutar").onchange = function(){
-        document.getElementById("quienResuelve").value="Confiabilidad";
+      actividadEjecutar = document.getElementById("actividadEjecutar").value;
+      
+      if(actividadEjecutar.length > 0){
+        document.getElementById("quienResuelve").value = "Confiabilidad";
+        quienResuelve=document.getElementById("quienResuelve").value = "Confiabilidad";
+        document.getElementById("quienResuelve").disabled=false;
+        console.log("Actividad a Ejecutar: "+ actividadEjecutar + " \nQuien Resuelve la actividad: " + quienResuelve)
+      }
+    };
+    // Capturo el campo quien reporta
+    document.getElementById("quienReporta").onchange = function(){
+      quienReporta = document.getElementById("quienReporta").value;
+    }
+    // Capturar id_punto_servicio
+    document.getElementById("idPuntoServicio").onchange = function () {
+      id_punto_servicio = document.getElementById("idPuntoServicio").value;
+      console.log(id_punto_servicio)
+    }
+        
+    // Capturar actividad a fuente
+    document.getElementById("fuente").onchange = function () {
+     fuente_reporta = document.getElementById("fuente").value;
+    }
+        
+    // Capturar actividad a contrata
+    document.getElementById("contrata").onchange = function () {
+      contrata = document.getElementById("contrata").value;
+     if(quienReporta.length == 0 || idPuntoServicio.length == 0 || actividadEjecutar.length == 0 || fuente.length == 0 || contrata.length == 0 || quienResuelve.length == 0){
+      envio_informacion.disabled = true
+     }
+     else {
+      console.log(quienReporta)
+      console.log(actividadEjecutar)
+      console.log(id_punto_servicio)
+      console.log(fuente_reporta)
+      console.log(contrata)
+      console.log(quienResuelve)
+      envio_informacion.disabled = false
+     }
     }
 
-    
 
 
-    
-    
-
-    </script>
-    
+  </script>
   </body>
 </html>
