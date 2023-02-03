@@ -1,3 +1,4 @@
+from datetime import date
 from django.urls import reverse
 from rest_framework.decorators import api_view
 from .serializer import HacerSerializer, PlaneacionSerializer
@@ -20,7 +21,7 @@ class getHacer(viewsets.ModelViewSet):
 
 def listPlaneacion(request):
     listado_planeacion = Planeacion.objects.all()
-    return render(request, "planeacion/formulario_planeacion.html", {"data": listado_planeacion})
+    return render(request, "planeacion/list_planeacion.html", {"data": listado_planeacion})
 
 
 def list_backlog(request):
@@ -63,3 +64,33 @@ def save_eventos(request):
         data = Backlog.objects.all()
         agregado = True
     return render(request, "eventos/listar_eventos.html", {"data": data, "info":agregado})
+
+
+def registrar_planeacion(request):
+    return render(request, "planeacion/formulario_planeacion.html",{})
+    
+
+def save_planeacion(request):
+
+    if request.method == "POST":
+        orden_ot = request.POST.get("ot")
+        origen = request.POST.get("origen")
+        contrata = request.POST.get("contrata")
+        resultado_inicial = Planeacion.objects.filter(pk=orden_ot)
+        if not resultado_inicial:
+            data = Planeacion.objects.create(
+                orden_trabajo = orden_ot,
+                fuente = origen,
+                contrata = contrata,
+                fecha_programacion = date.today(),
+                estado ="PENDIENTE"
+            )        
+            data.save()
+            informacion_total = Planeacion.objects.all()
+            return render(request, "planeacion/list_planeacion.html", {"data": informacion_total})
+        else:
+            print("Ya se encuentra en la BD")
+            informacion_total = Planeacion.objects.all()
+            return render(request, "planeacion/list_planeacion.html", {"data": informacion_total})
+    
+    

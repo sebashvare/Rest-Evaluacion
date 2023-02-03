@@ -20,3 +20,13 @@ body {
   background-color: #f96b07;
   border-color: #f96b07;
 }
+
+#celsia {
+  width:50px 
+}
+
+.botonesFormularios {
+  width: 100%;
+  background-color: #f96b07;
+  border-color: #f96b07;
+}

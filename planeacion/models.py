@@ -15,8 +15,6 @@ Los encargados de cada sector para realizar seguimiento.
 
 class Planeacion(models.Model):
     orden_trabajo = models.CharField(max_length=20, primary_key=True)
-    id_cuenta = models.CharField(max_length=20)
-    nombre_cuenta = models.CharField(max_length=150)
     fuente = models.CharField(max_length=20)
     contrata = models.CharField(max_length=20)
     fecha_programacion = models.DateField()

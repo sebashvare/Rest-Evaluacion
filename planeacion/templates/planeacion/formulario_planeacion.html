@@ -1,69 +1,67 @@
-{% extends 'base.html' %} 
-{% block title %} Programador Medida | Evaluacion {% endblock %}
-{% block content%}
+{% extends 'base.html' %} {% block title %} Programador Medida | Evaluacion {%endblock %} {% block content%}
 <div class="container-fluid">
   <h6 class="text-dark text-gray-600 text-uppercase">Programador Medida</h6>
-  <small class="form-text1">Rol: Registra la OT en el sistema</small>
+  <small class="form-text1">Rol: Este modulo permite registrar</small>
   <div class="card shadow mt-1">
     <div class="card-header py-3">
-      <p class="text-primary m-0 text-gray-600 text-uppercase">Informacion Planeacion</p>
+      <p class="text-primary m-0 text-gray-600 text-uppercase">
+        Informacion Planeacion
+      </p>
     </div>
     <div class="card-body">
+    <form name="formulario_planeacion" action="{% url 'planeacion:save_planeacion' %}" method="post" onsubmit="return validacionFormularioPlaneacion()">
+      {% csrf_token %}
       <div class="row">
-        <div class="col prueba">
-          <div class="input-group mt-2">
-            <input
-              class="form-control form-control-sm"
-              type="number"
-              placeholder="Ingrese la ORDEN ..."
-            />
+          <div class="col prueba">
+            <div class="input-group mt-2">
+              <input
+                class="form-control form-control-sm"
+                type="number"
+                placeholder="Ingrese la ORDEN ..."
+                name="ot"
+              />
+            </div>
+            <div class="input-group mt-2">
+              <small id="mensajeValidacionOT" class="text-danger"></small>
+            </div>
+            <div class="input-group mt-2">
+              <select name="origen" class="form-select form-select-sm">
+                <optgroup class="text-capitalize" label="Aplicacion de origen">
+                  <option disabled selected value>
+                    Seleccione una opcion de aplicacion de Origen
+                  </option>
+                  <option value="C2M">C2M</option>
+                  <option value="OSC">OSC</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="input-group mt-2">
+              <small id="mensajeValidacionOrigen" class="text-danger"></small>
+            </div>
+            <div class="input-group mt-2">
+              <select name="contrata" class="form-select form-select-sm">
+                <optgroup class="text-capitalize" label="Aplicacion de origen">
+                  <option disabled selected value>
+                    Seleccione una opcion de la contrata
+                  </option>
+                  <option value="Proing">Proing</option>
+                  <option value="Hesego">Hesego</option>
+                  <option value="Inelma">Inelma</option>
+                  <option value="Micol">Micol</option>
+                  <option value="Enecom">Enecom</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="input-group mt-2">
+              <small id="mensajeValidacionContrata" class="text-danger"></small>
+            </div>
+            <div class="input-group mt-1">
+              <button class="btn btn-primary botonesFormularios" id="saveData" type="submit">
+                Guardar Informacion
+              </button>
+            </div>
           </div>
-          <div class="input-group mt-2">
-            <input
-              class="form-control form-control-sm"
-              type="number"
-              placeholder="ID de cuenta"
-            />
-          </div>
-          <div class="input-group mt-2">
-            <input
-              class="form-control form-control-sm"
-              type="number"
-              placeholder="Nombre de cuenta"
-            />
-          </div>
-          <div class="input-group mt-2">
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              placeholder="Fuente"
-            />
-          </div>
-          <div class="input-group mt-2">
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              placeholder="Contrata"
-            />
-          </div>    
-          <div class="input-group mt-2">
-            <select class="form-select form-select-sm">
-              <optgroup label="Tipo de actividad">
-                <option value="12">This is item 1</option>
-                <option value="13">This is item 2</option>
-                <option value="14">This is item 3</option>
-              </optgroup>
-            </select>
-          </div>
-          <small class="form-text mt-1"
-            >* Seleccione el tipo de Actividad.</small
-          >
-          <div class="input-group mt-1">
-            <button class="btn btn-primary" id="guardar-info" type="button">
-              Guardar Informacion
-            </button>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>

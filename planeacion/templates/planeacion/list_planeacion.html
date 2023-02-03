@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %} Lista de planeacion | Evaluacion {% endblock title %}
+{% block content %}
+
+<div class="container-fluid mt-5">
+    <h6 class="text-dark text-gray-600 text-uppercase">Registro de Eventos</h6>
+    <small class="form-text1">
+      Rol: Este modulo permite registrar todos los eventos que no se pueda generar
+      una OT por algun motivo
+    </small>
+    <div class="card shadow mt-3">
+      <div class="card-header py-3">
+        <p class="text-primary m-0 text-gray-600 text-uppercase">Listado Eventos</p>
+        {% if info %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Informacion</strong> Se agrego informacion correctamente.
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+          </div>
+        {% endif %}
+        <div class="input-group mt-1">
+          <a class="btn btn-dark" href="{% url "planeacion:reg_planeacion" %}">Nueva Planeacion</a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <table id="sebastian" class="display responsive nowrap" style="width: 100%">
+            <thead>
+              <tr>
+                <th class="text-uppercase">ID</th>
+                <th class="text-uppercase">Fuente</th>
+                <th class="text-uppercase">Fecha</th>
+                <th class="text-uppercase">Estado</th>
+                <th class="text-uppercase">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for info in data %}
+                <tr>
+                  <td class="text-capitalcase">{{ info.orden_trabajo }}</td>
+                  <td class="text-capitalcase">{{ info.fuente }}</td>
+                  <td class="text-capitalcase">{{ info.fecha_programacion }}</td>
+                  <td class="text-capitalcase">{{ info.estado }}</td>
+                  <td>
+                    <div class="contenedorBotones">
+                      <button class="btn-dark botones">Modificar Evento</button>
+                      <button class="btn-danger botones"  type="button">Eliminar Evento</button>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th class="text-uppercase">ID</th>
+                <th class="text-uppercase">Fuente</th>
+                <th class="text-uppercase">Fecha</th>
+                <th class="text-uppercase">Estado</th>
+                <th class="text-uppercase">Acciones</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Tamma+2&amp;display=swap"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed&amp;display=swap"/>
+    <link rel="stylesheet" href="{% static 'assets/css/sebashvare.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome-all.min.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/Styles.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/css/sebashvare.css' %}" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     
@@ -23,8 +23,8 @@
       <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
         <div class="container-fluid d-flex flex-column p-0">
           <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-            <div class="sidebar-brand-icon rotate-n-15">
-              <i class="fas fa-broadcast-tower"></i>
+            <div class="sidebar-brand-icon">
+              <img id="celsia" src="{% static 'assets/img/Logo Celsia Blanco.png' %}" alt="" srcset="">
             </div>
             <div class="sidebar-brand-text mx-3">
               <span>evaluacion</span><span>&nbsp;phva</span><span></span>
@@ -43,7 +43,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url "planeacion:list_planeacion" %}"
+              <a class="nav-link" href="{% url "planeacion:listPlaneacion" %}"
                 ><i class="fas fa-table"></i><span>Programador Medida Especial</span></a
               >
             </li>
@@ -197,7 +197,7 @@
                         >Sebastian Herrera Varela</span
                       ><img
                         class="border rounded-circle img-profile"
-                        src="{}"
+                        src="{% static 'assets/img/Logo_naranja.png' %}"
                     /></a>
                     <div
                       class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
@@ -280,6 +280,7 @@
     // Funciones
     
     function habilitarButton(){
+
       envio_informacion.disabled = true;
     }
     /*
@@ -339,6 +340,30 @@
       envio_informacion.disabled = false
      }
     }
+
+    function validacionFormularioPlaneacion(){
+      let ordenTrabajo = document.forms["formulario_planeacion"]["ot"].value;
+      let origen = document.forms["formulario_planeacion"]["origen"].value;
+      let contrata = document.forms["formulario_planeacion"]["contrata"].value;
+      if(ordenTrabajo.length <= 0){
+        document.getElementById("mensajeValidacionOT").innerHTML="* Pendiente por diligenciar"
+       return false;
+      }else{
+        document.getElementById("mensajeValidacionOT").innerHTML=""
+        if(origen.length<=0) {
+          document.getElementById("mensajeValidacionOrigen").innerHTML="* Pendiente por diligenciar"
+          return false;       
+        }else{
+          document.getElementById("mensajeValidacionOrigen").innerHTML=""
+          if(contrata.length<=0){
+            document.getElementById("mensajeValidacionContrata").innerHTML="* Pendiente por diligenciar"
+            return false;
+          }
+        }
+      }
+      
+    }
+    
 
 
 
