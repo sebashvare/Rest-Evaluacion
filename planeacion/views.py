@@ -71,6 +71,7 @@ def registrar_planeacion(request):
     
 
 def save_planeacion(request):
+    resultado = ""    
 
     if request.method == "POST":
         orden_ot = request.POST.get("ot")
@@ -87,10 +88,12 @@ def save_planeacion(request):
             )        
             data.save()
             informacion_total = Planeacion.objects.all()
-            return render(request, "planeacion/list_planeacion.html", {"data": informacion_total})
+            resultado = "Se guardo la OT {} de manera correcta.".format(orden_ot)
+            return render(request, "planeacion/list_planeacion.html", {"data": informacion_total, "info":resultado})
         else:
             print("Ya se encuentra en la BD")
+            resultado = "La OT {} Ya se encuentra en la BD".format(orden_ot)
             informacion_total = Planeacion.objects.all()
-            return render(request, "planeacion/list_planeacion.html", {"data": informacion_total})
+            return render(request, "planeacion/list_planeacion.html", {"data": informacion_total, "info": resultado})
     
     

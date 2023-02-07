@@ -12,13 +12,15 @@
       <div class="card-header py-3">
         <p class="text-primary m-0 text-gray-600 text-uppercase">Listado Eventos</p>
         {% if info %}
+          
           <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Informacion</strong> Se agrego informacion correctamente.
+            <strong>Informacion</strong> {{ info }}.
             <button type="button"
                     class="btn-close"
                     data-bs-dismiss="alert"
                     aria-label="Close"></button>
           </div>
+          
         {% endif %}
         <div class="input-group mt-1">
           <a class="btn btn-dark" href="{% url "planeacion:reg_planeacion" %}">Nueva Planeacion</a>
