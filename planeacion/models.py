@@ -31,7 +31,7 @@ class Hacer(models.Model):
     numero_formato = models.CharField(max_length=20)
     multiplo = models.CharField(max_length=15)
     telemedida = models.CharField(max_length=15)
-    actualizacion_sistema = models.CharField(max_length=30)
+    actualizac0ion_sistema = models.CharField(max_length=30)
     pagar = models.CharField(max_length=30)
 
     def __str__(self):
