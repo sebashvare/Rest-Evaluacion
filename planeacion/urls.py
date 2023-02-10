@@ -15,6 +15,8 @@ urlpatterns = [
     path("planeacion", views.save_planeacion, name="save_planeacion"),
     path("regeplaneacion", views.registrar_planeacion, name="reg_planeacion"),
     path("listPlaneacion", views.listPlaneacion, name="listPlaneacion"),
+    path("listhacer", views.list_hacer, name="listhacer"),
+    path("regehacer", views.registrar_hacer, name="regehacer"),
 ]
 
 

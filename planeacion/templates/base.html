@@ -33,12 +33,12 @@
           <hr class="sidebar-divider my-0" />
           <ul class="navbar-nav text-light" id="accordionSidebar">
             <li class="nav-item">
-              <a class="nav-link" href="index.html"
+              <a class="nav-link" href="#"
                 ><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="profile.html"
+              <a class="nav-link" href="#"
                 ><i class="fas fa-user"></i><span>Planeacion</span></a
               >
             </li>
@@ -49,16 +49,21 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url "planeacion:list_backlog" %}"
-                ><i class="fas fa-table"></i><span>Registro Eventos</span></a
+                ><i class="fas fa-table"></i><span>Registro Eventos (Backlog)</span></a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="register.html"
-                ><i class="fas fa-table"></i><span>Evaluacion)</span></a
+              <a class="nav-link" href="{% url 'planeacion:listhacer' %}"
+                ><i class="fas fa-table"></i><span>Modulo Hacer</span></a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.html"
+              <a class="nav-link" href="#"
+                ><i class="fas fa-table"></i><span>Modulo Confiabilidad</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"
                 ><i class="far fa-user-circle"></i><span>Login</span></a
               >
             </li>

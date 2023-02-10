@@ -70,11 +70,11 @@ def save_eventos(request):
             )
             data.save()
             data = Backlog.objects.all()
-            agregado = True
+            agregado = "OK"
             return render(request, "eventos/listar_eventos.html", {"data": data, "info": agregado})
         else:
             data = Backlog.objects.all()
-            agregado = False
+            agregado = "ERROR"
             return render(request, "eventos/listar_eventos.html", {"data": data, "info": agregado})
 
 
@@ -554,3 +554,11 @@ def save_planeacion(request):
             resultado = "La OT {} Ya se encuentra en la BD".format(orden_ot)
             informacion_total = Planeacion.objects.all()
             return render(request, "planeacion/list_planeacion.html", {"data": informacion_total, "info": resultado})
+
+def list_hacer(request):
+    data = Hacer.objects.all()
+    return render(request, "hacer/list_hacer.html", {"data": data})
+
+def registrar_hacer(request):
+    data_planeacion = Planeacion.objects.filter(estado = "PENDIENTE")
+    return render(request, "hacer/registrar_hacer.html", {"data": data_planeacion})
