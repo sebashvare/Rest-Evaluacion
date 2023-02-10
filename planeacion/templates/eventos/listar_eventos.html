@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-{% block title %}Eventos | Evaluacion {% endblock title %}
+{% block title %}
+  Eventos | Evaluacion
+{% endblock title %}
 {% block content %}
   <div class="container-fluid mt-5">
     <h6 class="text-dark text-gray-600 text-uppercase">Registro de Eventos</h6>
@@ -13,6 +15,14 @@
         {% if info %}
           <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>Informacion</strong> Se agrego informacion correctamente.
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+          </div>
+        {% else %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Informacion</strong> Ya se encuentra el ID Puunto de Servicio en el sistema pendiente de resolver
             <button type="button"
                     class="btn-close"
                     data-bs-dismiss="alert"
@@ -54,8 +64,12 @@
                   <td class="text-capitalcase">{{ info.contrata }}</td>
                   <td>
                     <div class="contenedorBotones">
-                      <button class="btn-dark botones">Modificar Evento</button>
-                      <button class="btn-danger botones"  type="button">Eliminar Evento</button>
+                      <button class="btn-dark botones">
+                        Modificar Evento
+                      </button>
+                      <button class="btn-danger botones"  type="button">
+                        Eliminar Evento
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -63,16 +77,36 @@
             </tbody>
             <tfoot>
               <tr>
-                <th class="text-uppercase">ID</th>
-                <th class="text-uppercase">Fuente</th>
-                <th class="text-uppercase">Fecha</th>
-                <th class="text-uppercase">Reporte</th>
-                <th class="text-uppercase">ID Punto Servicio</th>
-                <th class="text-uppercase">Ejecucion</th>
-                <th class="text-uppercase">Estado</th>
-                <th class="text-uppercase">Responsable</th>
-                <th class="text-uppercase">Contrata</th>
-                <th class="text-uppercase">Acciones</th>
+                <th class="text-uppercase">
+                  ID
+                </th>
+                <th class="text-uppercase">
+                  Fuente
+                </th>
+                <th class="text-uppercase">
+                  Fecha
+                </th>
+                <th class="text-uppercase">
+                  Reporte
+                </th>
+                <th class="text-uppercase">
+                  ID Punto Servicio
+                </th>
+                <th class="text-uppercase">
+                  Ejecucion
+                </th>
+                <th class="text-uppercase">
+                  Estado
+                </th>
+                <th class="text-uppercase">
+                  Responsable
+                </th>
+                <th class="text-uppercase">
+                  Contrata
+                </th>
+                <th class="text-uppercase">
+                  Acciones
+                </th>
               </tr>
             </tfoot>
           </table>
