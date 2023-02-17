@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}
+  Registro Evaluacion | Evalaucion
+{% endblock title %}
+{% block content %}
+  <div class="container-fluid">
+    <h6 class="text-dark text-gray-600 text-uppercase">Registro Evaluacion</h6>
+    <small class="form-text1">Rol: Se registra segun la OT genarada por la PLANEACION y PREVIO gestionada por el HACER, la evaluacion para la OT</small>
+    <div class="card shadow mt-1">
+      <div class="card-header py-3">
+        <p class="text-primary m-0 text-gray-600 text-uppercase">Registro evaluacion</p>
+      </div>
+      <div class="card-body">
+        <form name="pruebas" action="{% url 'planeacion:save_evaluacion' %}" method="post" onsubmit="return validacion_formulario_evaluacion()">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col prueba">
+              <div class="input-group mt-2">
+                <small>* Orden de trabajo *</small>
+              </div>
+              <div class="input-group mt-2">
+                <select class="form-select form-select-sm" name="orde_OT_eva" id="orde_OT_eva">
+                  <optgroup label="Quien Reporta">
+                    <option disabled selected value>Seleccione una opcion</option>
+                    {% for datos in data %}
+                        <option value="{{ datos.orden_trabajo }}">{{ datos.orden_trabajo }} - {{ datos.fuente }}</option>
+                    {% endfor %}
+                  </optgroup>
+                </select>
+              </div>
+              <div class="input-group mt-2">
+                <small>Primera Factura</small>
+              </div>
+              <div class="input-group">
+                <div class="input-group mt-2">
+                  <input class="form-control" type="date" name="primera_factura" id="primera_factura"/>
+                </div>
+              </div>
+              <div class="input-group mt-2">
+                <small>Ultima Telemedida</small>
+              </div>
+              <div class="input-group">
+                <div class="input-group mt-2">
+                  <input class="form-control" type="date" name="fecha_telemedida" id="fecha_telemedida"/>
+                </div>
+              </div>
+              <div class="input-group mt-2">
+                <small>¿Conforme?</small>
+              </div>
+              <div class="input-group mt-2">
+                <select name="conforme" id="conforme" class="form-select form-select-sm">
+                  <optgroup label="conforme">
+                    <option disabled selected value>Seleccione una opcion</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="input-group mt-1">
+                <button class="btn btn-primary botonesFormularios" type="submit">Guardar Informacion</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

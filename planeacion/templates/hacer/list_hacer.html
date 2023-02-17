@@ -31,6 +31,7 @@
               <tr>
                 <th class="text-uppercase">ID</th>
                 <th class="text-uppercase">Orden Trabajo</th>
+                <th class="text-uppercase">Actividad Ejecutada</th>
                 <th class="text-uppercase">Numero Formato</th>
                 <th class="text-uppercase">Multiplo</th>
                 <th class="text-uppercase">Telemedida</th>
@@ -42,6 +43,7 @@
             <tbody>
               {% for info in data %}
                 <tr>
+                  <td class="text-capitalcase">{{ info.pk }}</td>
                   <td class="text-capitalcase">{{ info.orden_trabajo }}</td>
                   <td class="text-capitalcase">{{ info.actividad_ejecutada }}</td>
                   <td class="text-capitalcase">{{ info.numero_formato }}</td>
@@ -49,7 +51,6 @@
                   <td class="text-capitalcase">{{ info.telemedida }}</td>
                   <td class="text-capitalcase">{{ info.actualizac0ion_sistema }}</td>
                   <td class="text-capitalcase">{{ info.pagar }}</td>
-                  <td class="text-capitalcase">{{ info.responsable }}</td>
                   <td>
                     <div class="contenedorBotones">
                       <button class="btn-dark botones">
@@ -65,14 +66,15 @@
             </tbody>
             <tfoot>
             <tr>
-                <th class="text-uppercase">ID</th>
-                <th class="text-uppercase">Orden Trabajo</th>
-                <th class="text-uppercase">Numero Formato</th>
-                <th class="text-uppercase">Multiplo</th>
-                <th class="text-uppercase">Telemedida</th>
-                <th class="text-uppercase">Actualizacion Sistema</th>
-                <th class="text-uppercase">Pagar</th>
-                <th class="text-uppercase">Acciones</th>
+              <th class="text-uppercase">ID</th>
+              <th class="text-uppercase">Orden Trabajo</th>
+              <th class="text-uppercase">Actividad Ejecutada</th>
+              <th class="text-uppercase">Numero Formato</th>
+              <th class="text-uppercase">Multiplo</th>
+              <th class="text-uppercase">Telemedida</th>
+              <th class="text-uppercase">Actualizacion Sistema</th>
+              <th class="text-uppercase">Pagar</th>
+              <th class="text-uppercase">Acciones</th>
             </tr>
             </tfoot>
           </table>

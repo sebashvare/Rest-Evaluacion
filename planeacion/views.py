@@ -3,7 +3,7 @@ from django.urls import reverse
 from rest_framework.decorators import api_view
 from .serializer import HacerSerializer, PlaneacionSerializer
 from rest_framework import viewsets
-from .models import Hacer, Planeacion, Backlog
+from .models import Hacer, Planeacion, Backlog, Evaluacion
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core import serializers
@@ -58,7 +58,8 @@ def save_eventos(request):
         fuente = request.POST.get("fuente")
         contrata = request.POST.get("contrata")
         quienResuelve = request.POST.get("quienResuelve")
-        resultado_inicial = Backlog.objects.filter(id_punto_servicio=idPuntoServicio, estado="Pendiente")
+        resultado_inicial = Backlog.objects.filter(
+            id_punto_servicio=idPuntoServicio, estado="Pendiente")
         if not resultado_inicial:
             data = Backlog(
                 fuente=quienReporta,
@@ -555,10 +556,79 @@ def save_planeacion(request):
             informacion_total = Planeacion.objects.all()
             return render(request, "planeacion/list_planeacion.html", {"data": informacion_total, "info": resultado})
 
+
 def list_hacer(request):
     data = Hacer.objects.all()
     return render(request, "hacer/list_hacer.html", {"data": data})
 
+
 def registrar_hacer(request):
-    data_planeacion = Planeacion.objects.filter(estado = "PENDIENTE")
+    data_planeacion = Planeacion.objects.filter(estado="PENDIENTE")
     return render(request, "hacer/registrar_hacer.html", {"data": data_planeacion})
+
+
+def save_hacer(request):
+
+    if request.method == "POST":
+        orden_OT = request.POST.get("orden_OT")
+        actividad_ejecutada = request.POST.get("actividad_ejecutada")
+        numero_formato = request.POST.get("numero_formato")
+        multiplo = request.POST.get("multiplo")
+        fecha_telemedida = request.POST.get("fecha_telemedida")
+        actualizacion_sistema = request.POST.get("actualizacion_sistema")
+        pago_actividad = request.POST.get("pago_actividad")
+        ot_final = Planeacion.objects.get(pk=orden_OT)
+        ot_final.estado = "PENDIENTE EVALUACION"
+        ot_final.save()
+        data = Hacer(
+            orden_trabajo=ot_final,
+            actividad_ejecutada=actividad_ejecutada,
+            numero_formato=numero_formato,
+            multiplo=multiplo,
+            telemedida=fecha_telemedida,
+            actualizac0ion_sistema=actualizacion_sistema,
+            pagar=pago_actividad
+        )
+        data.save()
+        info = Hacer.objects.all()
+        return render(request, "hacer/list_hacer.html", {"data": info})
+    return render(request, "hacer/list_hacer.html", {"data": info})
+
+
+def list_evaluacion(request):
+    data = Planeacion.objects.filter(estado="PENDIENTE EVALUACION")
+    data_evaluacion = Evaluacion.objects.all()
+    return render(request, "evaluacion/listar_evaluacion.html", {"data": data, "data_evaluacion": data_evaluacion})
+
+
+def registrar_evaluacion(request):
+    data_evaluacion = Planeacion.objects.filter(estado="PENDIENTE EVALUACION")
+    return render(request, "evaluacion/registrar_evaluacion.html", {"data": data_evaluacion})
+
+
+def save_evaluacion(request):
+    
+    if request.method == "POST":
+        orden_OT = request.POST.get("orde_OT_eva")
+        primera_factura = request.POST.get("primera_factura")
+        fecha_telemedida = request.POST.get("fecha_telemedida")
+        conforme = request.POST.get("conforme")
+        ot_final = Planeacion.objects.get(pk=orden_OT)
+        ot_final.estado = "TERMINADO"
+        ot_final.save()
+        data = Evaluacion(
+            orden_trabajo=ot_final,
+            primera_factura=primera_factura,
+            ultima_telemedida=fecha_telemedida,
+            conforme=conforme,
+        )
+        data.save()
+        """
+		Querys: Consulto la tabla Planeacion para listar nuevamente los clientes Pendientes por estado de Evaluacion
+		Querys: Consulto la tabla Evaluacion para listar todos los registros de la Evaluacion
+  		"""
+        data_planeacion = Planeacion.objects.filter(estado="PENDIENTE EVALUACION")
+        data_evaluacion = Evaluacion.objects.all()
+        info = True
+        return render(request, "evaluacion/listar_evaluacion.html", {"data": data_planeacion, "data_evaluacion": data_evaluacion, "info": info})
+    return render(request, "evaluacion/listar_evaluacion.html", {"data": data_planeacion, "data_evaluacion": data_evaluacion, "info": False})

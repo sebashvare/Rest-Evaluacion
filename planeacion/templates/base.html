@@ -58,6 +58,11 @@
               >
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'planeacion:evaluacion' %}"
+                ><i class="fas fa-table"></i><span>Modulo Evaluacion</span></a
+              >
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#"
                 ><i class="fas fa-table"></i><span>Modulo Confiabilidad</span></a
               >
@@ -262,116 +267,22 @@
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
-    
+    <script src="{% static 'assets/js/validaciones.js'%}"></script>
     <script type="text/javascript">
-      // Variables
-      var informacion_data = "";
-      var quienReporta = "";
-      var actividadEjecutar = "";
-      var id_punto_servicio = 0;
-      var fuente_reporta = "";
-      var contrata = "";
-      var quienResuelve = "";
-
-      envio_informacion = document.getElementById("guardar-info");
-      
+            
       // DataTable
       $(document).ready(function () {
         $('#sebastian').DataTable({
           
         });
     });
-
-    // Funciones
-    
-    function habilitarButton(){
-
-      envio_informacion.disabled = true;
-    }
-    /*
-      Deshabilitamos el boton para enviar la informacion asi estamos seguros
-      que el formulario se lleno correctamente.
-    */
-    document.addEventListener("DOMContentLoaded", function(){
-      habilitarButton();
+      $(document).ready(function () {
+        $('#evaluacion').DataTable({
+          
+        });
     });
 
-    /*
-    Deshabilito el campo quien resuelve ya que dependiendo de la actividad a actividadEjecutar
-    esta tendra un responsable.
-    */
-    document.getElementById("quienResuelve").disabled=true;
     
-    // Segun la actividad a ejecutar seleccionamos la el grupo encargado para que ejecute la actividad, por defecto confiiabilidad debe enterarse de la avctividad.
-    
-    document.getElementById("actividadEjecutar").onchange = function(){
-      actividadEjecutar = document.getElementById("actividadEjecutar").value;
-      
-      if(actividadEjecutar.length > 0){
-        document.getElementById("quienResuelve").value = "Confiabilidad";
-        quienResuelve=document.getElementById("quienResuelve").value = "Confiabilidad";
-        document.getElementById("quienResuelve").disabled=false;
-        console.log("Actividad a Ejecutar: "+ actividadEjecutar + " \nQuien Resuelve la actividad: " + quienResuelve)
-      }
-    };
-    // Capturo el campo quien reporta
-    document.getElementById("quienReporta").onchange = function(){
-      quienReporta = document.getElementById("quienReporta").value;
-    }
-    // Capturar id_punto_servicio
-    document.getElementById("idPuntoServicio").onchange = function () {
-      id_punto_servicio = document.getElementById("idPuntoServicio").value;
-      console.log(id_punto_servicio)
-    }
-        
-    // Capturar actividad a fuente
-    document.getElementById("fuente").onchange = function () {
-     fuente_reporta = document.getElementById("fuente").value;
-    }
-        
-    // Capturar actividad a contrata
-    document.getElementById("contrata").onchange = function () {
-      contrata = document.getElementById("contrata").value;
-     if(quienReporta.length == 0 || idPuntoServicio.length == 0 || actividadEjecutar.length == 0 || fuente.length == 0 || contrata.length == 0 || quienResuelve.length == 0){
-      envio_informacion.disabled = true
-     }
-     else {
-      console.log(quienReporta)
-      console.log(actividadEjecutar)
-      console.log(id_punto_servicio)
-      console.log(fuente_reporta)
-      console.log(contrata)
-      console.log(quienResuelve)
-      envio_informacion.disabled = false
-     }
-    }
-
-    function validacionFormularioPlaneacion(){
-      let ordenTrabajo = document.forms["formulario_planeacion"]["ot"].value;
-      let origen = document.forms["formulario_planeacion"]["origen"].value;
-      let contrata = document.forms["formulario_planeacion"]["contrata"].value;
-      if(ordenTrabajo.length <= 0){
-        document.getElementById("mensajeValidacionOT").innerHTML="* Pendiente por diligenciar"
-       return false;
-      }else{
-        document.getElementById("mensajeValidacionOT").innerHTML=""
-        if(origen.length<=0) {
-          document.getElementById("mensajeValidacionOrigen").innerHTML="* Pendiente por diligenciar"
-          return false;       
-        }else{
-          document.getElementById("mensajeValidacionOrigen").innerHTML=""
-          if(contrata.length<=0){
-            document.getElementById("mensajeValidacionContrata").innerHTML="* Pendiente por diligenciar"
-            return false;
-          }
-        }
-      }
-      
-    }
-    
-
-
-
   </script>
   </body>
 </html>

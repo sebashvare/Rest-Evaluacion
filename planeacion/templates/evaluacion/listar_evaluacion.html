@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}
+  Evaluacion | Evaluacion
+{% endblock title %}
+{% block content %}
+  <div class="container-fluid mt-5">
+    <h6 class="text-dark text-gray-600 text-uppercase">Listado Planeacion pendiente por gestion de Evaluacion</h6>
+    <div class="card shadow mt-3">
+      <div class="card-body">
+        <div class="row">
+          <table id="sebastian" class="display responsive nowrap" style="width: 100%">
+            <thead>
+              <tr>
+                <th class="text-uppercase">OT</th>
+                <th class="text-uppercase">Fuente</th>
+                <th class="text-uppercase">Fecha</th>
+                <th class="text-uppercase">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for info in data %}
+                <tr>
+                  <td class="text-capitalcase">{{ info.orden_trabajo }}</td>
+                  <td class="text-capitalcase">{{ info.fuente }}</td>
+                  <td class="text-capitalcase">{{ info.fecha_programacion }}</td>
+                  <td class="text-capitalcase">{{ info.estado }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th class="text-uppercase">OT</th>
+                <th class="text-uppercase">Fuente</th>
+                <th class="text-uppercase">Fecha</th>
+                <th class="text-uppercase">Estado</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt-5">
+    <h6 class="text-dark text-gray-600 text-uppercase">Listado Evaluacion</h6>
+    <small class="form-text1">
+      Rol: Este modulo permite listar las OT que se encuentran resuueltas por parte del equipo de evaluacion
+    </small>
+    <div class="card shadow mt-3">
+      <div class="card-header py-3">
+        <p class="text-primary m-0 text-gray-600 text-uppercase">Listado Modulo Evaluacion</p>
+        {% if info %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Informacion</strong> Se agrego informacion correctamente.
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+          </div>
+        {% endif %}
+        <div class="input-group mt-1">
+          <a class="btn btn-dark" href="{% url "planeacion:rege_evaluacion" %}">Gestion Evaluacion</a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <table id="evaluacion" class="display responsive nowrap" style="width: 100%">
+            <thead>
+              <tr>
+                <th class="text-uppercase">ID</th>
+                <th class="text-uppercase">Orden Trabajo</th>
+                <th class="text-uppercase">Primera Factura</th>
+                <th class="text-uppercase">Ultima Telemedida</th>
+                <th class="text-uppercase">Conforme</th>
+                <th class="text-uppercase">Acciones</th>
+             </tr>
+            </thead>
+            <tbody>
+              {% for info in data_evaluacion %}
+                <tr>
+                  <td class="text-capitalcase">{{ info.pk }}</td>
+                  <td class="text-capitalcase">{{ info.orden_trabajo }}</td>
+                  <td class="text-capitalcase">{{ info.primera_factura }}</td>
+                  <td class="text-capitalcase">{{ info.ultima_telemedida }}</td>
+                  <td class="text-capitalcase">{{ info.conforme }}</td>
+                  <td>                    
+                    <div class="contenedorBotones"><button class="btn-dark botones">Modificar Evaluacion</button>
+                      <button class="btn-danger botones"  type="button">Eliminar Evaluacion</button>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+              <th class="text-uppercase">ID</th>
+                <th class="text-uppercase">Orden Trabajo</th>
+                <th class="text-uppercase">Primera Factura</th>
+                <th class="text-uppercase">Ultima Telemedida</th>
+                <th class="text-uppercase">Conforme</th>
+                <th class="text-uppercase">Acciones</th>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

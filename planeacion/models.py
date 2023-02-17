@@ -20,6 +20,7 @@ class Planeacion(models.Model):
     fecha_programacion = models.DateField()
     estado = models.CharField(max_length=20)
 
+
     def __str__(self):
         return str(self.orden_trabajo)
     

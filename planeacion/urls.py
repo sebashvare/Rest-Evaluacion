@@ -17,6 +17,10 @@ urlpatterns = [
     path("listPlaneacion", views.listPlaneacion, name="listPlaneacion"),
     path("listhacer", views.list_hacer, name="listhacer"),
     path("regehacer", views.registrar_hacer, name="regehacer"),
+    path("hacer", views.save_hacer, name="save_hacer"),
+    path("evaluacion", views.list_evaluacion, name="evaluacion"),
+    path("regevaluacion", views.registrar_evaluacion, name="rege_evaluacion"),
+    path("saveevaluacion", views.save_evaluacion, name="save_evaluacion"),
 ]
 
 

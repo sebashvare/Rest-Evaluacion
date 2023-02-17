@@ -11,137 +11,175 @@
         <p class="text-primary m-0 text-gray-600 text-uppercase">Registro Hacer</p>
       </div>
       <div class="card-body">
-        <form action="{% url 'planeacion:save_event' %}" method="post">
+        <form name="hacer" action="{% url 'planeacion:save_hacer' %}" method="post" onsubmit="return validacion_formulario_hacer()">
           {% csrf_token %}
           <div class="row">
             <div class="col prueba">
               <div class="input-group mt-2">
-                <small>* Orden de trabajo *</small>
+                <small id="sebas">* Orden de trabajo *</small>
               </div>
               <div class="input-group mt-2">
-                <select class="form-select form-select-sm" id="quienReporta" name="quienReporta">
+                <select class="form-select form-select-sm" name="orden_OT" id="orden_OT">
                   <optgroup label="Quien Reporta">
                     <option disabled selected value>Seleccione una opcion</option>
-                    
                     {% for datos in data %}
-                        <option value="Campañas Medida">{{ datos.orden_trabajo }} - {{ datos.fuente }}</option>
+                        <option value="{{ datos.orden_trabajo }}">{{ datos.orden_trabajo }} - {{ datos.fuente }}</option>
                     {% endfor %}
-                                       
                   </optgroup>
                 </select>
               </div>
               <div class="input-group mt-2">
-                <small>* Digite ID PUNTO DE SERVICIO</small>
+                <small>Actividad Ejecutada</small>
+              </div>
+              <div class="input-group mt-2">
+                <select class="form-select form-select-sm" name="actividad_ejecutada" id="actividad_ejecutada">
+                  <optgroup label="Quien Reporta">
+                    <option disabled selected value>Seleccione una opcion</option>
+                    <option value="Acompañamiento a otros equipos en subestaciones">Acompañamiento a otros equipos en subestaciones</option>
+                    <option value="Adecuación de cable control">Adecuación de cable control</option>
+                    <option value="Adecuación de tableros para medidores">Adecuación de tableros para medidores</option>
+                    <option value="Asegurar Medidor Macromedición">Asegurar Medidor Macromedición</option>
+                    <option value="Bajada de datos contadores de energía y equipos de calidad de la potencia.">Bajada de datos contadores de energía y equipos de calidad de la potencia.</option>
+                    <option value="Cableado de señales de Comunicación">Cableado de señales de Comunicación</option>
+                    <option value="Cableado de señales eléctricas">Cableado de señales eléctricas</option>
+                    <option value="Cambio nivel de tensión">Cambio nivel de tensión</option>
+                    <option value="Corte de servicio">Corte de servicio</option>
+                    <option value="Desinstalación de equipo de medida MT N2, N3">Desinstalación de equipo de medida MT N2, N3</option>
+                    <option value="Desinstalación de equipo de medida N1">Desinstalación de equipo de medida N1</option>
+                    <option value="Digitación de ordenes de servicio de otro contratista">Digitación de ordenes de servicio de otro contratista</option>
+                    <option value="Diligeniamiento Acta de Irregularidad">Diligeniamiento Acta de Irregularidad</option>
+                    <option value="Energización de Transformador">Energización de Transformador</option>
+                    <option value="Inspección ME">Inspección ME</option>
+                    <option value="Inspección previa ME">Inspección previa ME</option>
+                    <option value="Instalación completa de macromedición">Instalación completa de macromedición</option>
+                    <option value="Instalación completa suministro ME (nivel N1)">Instalación completa suministro ME (nivel N1)</option>
+                    <option value="Instalación completa suministro ME (nivel N2, N3)">Instalación completa suministro ME (nivel N2, N3)</option>
+                    <option value="Instalación de impedancias">Instalación de impedancias</option>
+                    <option value="Instalación de manta">Instalación de manta</option>
+                    <option value="Instalación o cambio bloque de pruebas">Instalación o cambio bloque de pruebas</option>
+                    <option value="Instalación o cambio caja de TCs (nivel N1)">Instalación o cambio caja de TCs (nivel N1)</option>
+                    <option value="Instalación o cambio de bloque y cable de control (nivel N1, N2, N3)">Instalación o cambio de bloque y cable de control (nivel N1, N2, N3)</option>
+                    <option value="Instalación o cambio de cable control  (nivel N1, N2, N3)">Instalación o cambio de cable control  (nivel N1, N2, N3)</option>
+                    <option value="Instalación o cambio de cable control macromedición">Instalación o cambio de cable control macromedición</option>
+                    <option value="Instalación o cambio de caja de derivación">Instalación o cambio de caja de derivación</option>
+                    <option value="Instalación o cambio de caja de medidor y/o medidor macromedición">Instalación o cambio de caja de medidor y/o medidor macromedición</option>
+                    <option value="Instalación o cambio de caja de TCs y medidor macromedición">Instalación o cambio de caja de TCs y medidor macromedición</option>
+                    <option value="Instalación o cambio de caja ME (nivel N1, N2, N3)">Instalación o cambio de caja ME (nivel N1, N2, N3)</option>
+                    <option value="Instalación o cambio de elemento de corte">Instalación o cambio de elemento de corte</option>
+                    <option value="Instalación o cambio de medidor macromedición">Instalación o cambio de medidor macromedición</option>
+                    <option value="Instalación o cambio de medidor testigo">Instalación o cambio de medidor testigo</option>
+                    <option value="Instalación o cambio de medidor y caja de medidor ME (nivel N1, N2, N3)">Instalación o cambio de medidor y caja de medidor ME (nivel N1, N2, N3)</option>
+                    <option value="Instalación o cambio de medidor y TCs (nivel N1)">Instalación o cambio de medidor y TCs (nivel N1)</option>
+                    <option value="Instalación o cambio de medidor y TCs (nivel N2, N3)">Instalación o cambio de medidor y TCs (nivel N2, N3)</option>
+                    <option value="Instalación o cambio de medidor y/o caja de TCs (nivel N1)">Instalación o cambio de medidor y/o caja de TCs (nivel N1)</option>
+                    <option value="Instalación o cambio de medidor y/o TCs y cable de comunicaciones">Instalación o cambio de medidor y/o TCs y cable de comunicaciones</option>
+                    <option value="Instalación o cambio de medidor,  TCs y caja de TCs (nivel N1)">Instalación o cambio de medidor,  TCs y caja de TCs (nivel N1)</option>
+                    <option value="Instalación o cambio de medidor, TCs y caja de medidor (nivel N1)">Instalación o cambio de medidor, TCs y caja de medidor (nivel N1)</option>
+                    <option value="Instalación o cambio de medidor, TCs y caja de TCs (nivel N1)">Instalación o cambio de medidor, TCs y caja de TCs (nivel N1)</option>
+                    <option value="Instalación o cambio de medidor, TCs y/o caja de medidor (nivel N2, N3)">Instalación o cambio de medidor, TCs y/o caja de medidor (nivel N2, N3)</option>
+                    <option value="Instalación o cambio de medidores de energía o equipos de calidad de la potencia.">Instalación o cambio de medidores de energía o equipos de calidad de la potencia.</option>
+                    <option value="Instalación o cambio de TCs (nivel N2, N3)">Instalación o cambio de TCs (nivel N2, N3)</option>
+                    <option value="Instalación o cambio de TCs y  caja de TCs (nivel N1)">Instalación o cambio de TCs y  caja de TCs (nivel N1)</option>
+                    <option value="Instalación o cambio de TCs y caja de medidor (nivel N1)">Instalación o cambio de TCs y caja de medidor (nivel N1)</option>
+                    <option value="Instalación o cambio de TCs y caja de medidor (nivel N2, N3)">Instalación o cambio de TCs y caja de medidor (nivel N2, N3)</option>
+                    <option value="Instalación o cambio de TCs y caja de TCs (nivel N1)">Instalación o cambio de TCs y caja de TCs (nivel N1)</option>
+                    <option value="Instalación o cambio de TCs y/o caja de medidor macromedición">Instalación o cambio de TCs y/o caja de medidor macromedición</option>
+                    <option value="Instalación o cambio de TCs, caja de TCs y caja de medidor (nivel N1)">Instalación o cambio de TCs, caja de TCs y caja de medidor (nivel N1)</option>
+                    <option value="Instalación o cambio de TCs, TPs y caja de medidor (nivel N2, N3)">Instalación o cambio de TCs, TPs y caja de medidor (nivel N2, N3)</option>
+                    <option value="Instalación o cambio de TPs (nivel N2, N3)">Instalación o cambio de TPs (nivel N2, N3)</option>
+                    <option value="Instalación o cambio de TPs y caja de medidor (nivel N2, N3)">Instalación o cambio de TPs y caja de medidor (nivel N2, N3)</option>
+                    <option value="Instalación o cambio medidor ME (nivel N1, N2, N3)">Instalación o cambio medidor ME (nivel N1, N2, N3)</option>
+                    <option value="Instalación o cambio TCs (nivel N1)">Instalación o cambio TCs (nivel N1)</option>
+                    <option value="Instalación/cambio transformador de medida en AT, MT y BT.">Instalación/cambio transformador de medida en AT, MT y BT.</option>
+                    <option value="Levantamiento de Redes Subterráneas MT/BT con Equipo Trazador.">Levantamiento de Redes Subterráneas MT/BT con Equipo Trazador.</option>
+                    <option value="Levantamiento de registro fotográfico y actas de vida de los sistemas de medición">Levantamiento de registro fotográfico y actas de vida de los sistemas de medición</option>
+                    <option value="Maniobra en equipo de seccionamiento FR">Maniobra en equipo de seccionamiento FR</option>
+                    <option value="Medición cargabilidad secundario transformadores de Medida">Medición cargabilidad secundario transformadores de Medida</option>
+                    <option value="Normalización de breaker en medida centralizada">Normalización de breaker en medida centralizada</option>
+                    <option value="Normalización Telemedida">Normalización Telemedida</option>
+                    <option value="Notificación">Notificación</option>
+                    <option value="Programación actividades con comercializadores y clientes">Programación actividades con comercializadores y clientes</option>
+                    <option value="Programación actividades con comercializadores y clientes ME en redes propias y otras redes">Programación actividades con comercializadores y clientes ME en redes propias y otras redes</option>
+                    <option value="Programación parámetros medidor">Programación parámetros medidor</option>
+                    <option value="Prueba de relación transformadores de medida">Prueba de relación transformadores de medida</option>
+                    <option value="Puesta a tierra de la medida">Puesta a tierra de la medida</option>
+                    <option value="Reclamación de daños por siniestros">Reclamación de daños por siniestros</option>
+                    <option value="Reconexión del servicio con transformador compartido con apertura y cierre MT">Reconexión del servicio con transformador compartido con apertura y cierre MT</option>
+                    <option value="Reconexión del servicio en red chilena con suspensión del servicio en MT">Reconexión del servicio en red chilena con suspensión del servicio en MT</option>
+                    <option value="Reconexión del servicio MT">Reconexión del servicio MT</option>
+                    <option value="Retiro de servicio directo">Retiro de servicio directo</option>
+                    <option value="Reubicación del medidor Macromedición">Reubicación del medidor Macromedición</option>
+                    <option value="Revisión de la suspensión">Revisión de la suspensión</option>
+                    <option value="Revisión de la suspensión en red chilena o subterránea">Revisión de la suspensión en red chilena o subterránea</option>
+                    <option value="Revisión macromedición BT">Revisión macromedición BT</option>
+                    <option value="Revisión medida especial">Revisión medida especial</option>
+                    <option value="Revisión puntos de medición">Revisión puntos de medición</option>
+                    <option value="Suspensión del servicio con transformador compartido con apertura y cierre MT">Suspensión del servicio con transformador compartido con apertura y cierre MT</option>
+                    <option value="Suspensión del servicio en red chilena con suspensión del servicio en MT">Suspensión del servicio en red chilena con suspensión del servicio en MT</option>
+                    <option value="Suspensión del servicio MT">Suspensión del servicio MT</option>
+                    <option value="Suspensión del servicio MT en transformador compartido">Suspensión del servicio MT en transformador compartido</option>
+                    <option value="Toma de Corriente MT">Toma de Corriente MT</option>
+                    <option value="Toma de foto de placa de características">Toma de foto de placa de características</option>
+                    <option value="Toma de lectura en carro Medida Centralizada (MCZ)">Toma de lectura en carro Medida Centralizada (MCZ)</option>
+                    <option value="Visita fallida en carro">Visita fallida en carro</option>
+                    <option value="Visita fallida suspensión">Visita fallida suspensión</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="input-group mt-2">
+                <small>Digite el numero de formato</small>
               </div>
               <div class="input-group mt-2">
                 <input class="form-control form-control-sm"
                        type="number"
-                       placeholder="ID Punto Servicio"
-                       id="idPuntoServicio"
-                       name="idPuntoServicio"/>
+                       placeholder="# Formato"
+                       name="numero_formato"
+                       id="numero_formato"/>
               </div>
               <div class="input-group mt-2">
-                <small>* Seleccione actividad a ejecutar</small>
-              </div>
-              <div class="input-group mt-2">
-                <select id="actividadEjecutar"
-                        name="actividadEjecutar"
-                        class="form-select form-select-sm"
-                        onchange="capturar()">
-                  <optgroup label="Tipo de actividad">
-                    <option disabled selected value>
-                      Seleccione una opcion
-                    </option>
-                    <option value="Revision por alto consumo">
-                      Revision por alto consumo
-                    </option>
-                    <option value="Reprogramacion equipos de medida">
-                      Reprogramacion equipos de medida
-                    </option>
-                    <option value="Normalizar equipos y aseguramiento de la medida">
-                      Normalizar equipos y aseguramiento de la medida
-                    </option>
-                    <option value="Verificar cumplimiento de norma e instalacion del servicio">
-                      Verificar cumplimiento de norma e instalacion del servicio
-                    </option>
-                    <option value="Normalizacion comunicación y asegurar bajada de datos">
-                      Normalizacion comunicación y asegurar bajada de datos
-                    </option>
-                    <option value="Normalizacion y aseguramiento de la medida">
-                      Normalizacion y aseguramiento de la medida
-                    </option>
-                    <option value="Suspender servicio de cañuelas">
-                      Suspender servicio de cañuelas
-                    </option>
-                    <option value="Suspender servicio de poste">
-                      Suspender servicio de poste
-                    </option>
-                    <option value="Garantizar estado de la medida">
-                      Garantizar estado de la medida
-                    </option>
-                    <option value="Aseguramiento de equipo md y la informacion por siniestro">
-                      Aseguramiento de equipo md y la informacion por siniestro
-                    </option>
-                    <option value="Normalizar reporte de anomalia">
-                      Normalizar reporte de anomalia
-                    </option>
-                    <option value="Instalacion a cliente provisional">
-                      Instalacion a cliente provisional
-                    </option>
-                    <option value="Programacion a otros comercializadores">
-                      Programacion a otros comercializadores
-                    </option>
-                  </optgroup>
-                </select>
-              </div>
-              <div class="input-group mt-2">
-                <select id="fuente" name="fuente" class="form-select form-select-sm">
-                  <optgroup label="Fuente">
-                    <option disabled selected value>
-                      Seleccione una opcion
-                    </option>
-                    <option value="TyD">
-                      TyD
-                    </option>
-                    <option value="OYMM">
-                      OYMM
-                    </option>
-                  </optgroup>
-                </select>
-              </div>
-              <div class="input-group mt-2">
-                <select id="contrata" name="contrata" class="form-select form-select-sm">
-                  <optgroup label="Contratista">
-                    <option disabled selected value>
-                      Seleccione una opcion
-                    </option>
-                    <option value="Proing">
-                      Proing
-                    </option>
-                    <option value="Hesego">
-                      Hesego
-                    </option>
-                    <option value="Inelma">
-                      Inelma
-                    </option>
-                    <option value="Micol">
-                      Micol
-                    </option>
-                    <option value="Enecom">
-                      Enecom
-                    </option>
-                  </optgroup>
-                </select>
+                <small>Digite el Multiplo</small>
               </div>
               <div class="input-group mt-2">
                 <input class="form-control form-control-sm"
-                       type="text"
-                       placeholder="Quien Resuelve"
-                       id="quienResuelve"
-                       name="quienResuelve"/>
+                       type="number"
+                       placeholder="Multiplo"
+                       name="multiplo"
+                       id="multiplo"/>
+              </div>
+              <div class="input-group mt-2">
+                <small>Ultima Telemedida</small>
+              </div>
+              <div class="input-group mt-2">
+                <div class="input-group mt-2">
+                  <input class="form-control" type="date" name="fecha_telemedida" id="fecha_telemedida"/>
+                </div>
+              </div>
+              <div class="input-group mt-2">
+                <small>Actualizacion Sistema</small>
+              </div>
+              <div class="input-group mt-2">
+                <select name="actualizacion_sistema" id="actualizacion_sistema" class="form-select form-select-sm">
+                  <optgroup label="Actualizacion Sistema">
+                    <option disabled selected value>Seleccione una opcion</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="input-group mt-2">
+                <small>¿Se debe pagar la actividad?</small>
+              </div>
+              <div class="input-group mt-2">
+                <select name="pago_actividad" id="pago_actividad" class="form-select form-select-sm">
+                  <optgroup label="pago_actividad">
+                    <option disabled selected value>Seleccione una opcion</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                  </optgroup>
+                </select>
               </div>
               <div class="input-group mt-1">
-                <button class="btn btn-primary" id="guardar-info" type="submit">Guardar Informacion</button>
+                <button class="btn btn-primary botonesFormularios" type="submit">Guardar Informacion</button>
               </div>
             </div>
           </form>
