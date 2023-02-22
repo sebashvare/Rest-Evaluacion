@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/Styles.css' %}" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.6.0/css/select.dataTables.min.css">
     
   </head>
 
@@ -58,14 +59,11 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'planeacion:evaluacion' %}"
-                ><i class="fas fa-table"></i><span>Modulo Evaluacion</span></a
-              >
+              <a class="nav-link" href="{% url 'planeacion:evaluacion' %}"><i class="fas fa-table"></i><span>Modulo Evaluacion</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"
-                ><i class="fas fa-table"></i><span>Modulo Confiabilidad</span></a
-              >
+              <a class="nav-link" href="#">
+                <i class="fas fa-table"></i><span>Modulo Confiabilidad</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"
@@ -267,18 +265,32 @@
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
-    <script src="{% static 'assets/js/validaciones.js'%}"></script>
+    <!--Importaciones DataTable Export-->
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
+	  <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	  <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	  <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+	  <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.html5.min.js"></script>
+	  <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.print.min.js"></script>
+	  <script src="{% static 'assets/js/validaciones.js'%}"></script>
+    
     <script type="text/javascript">
             
       // DataTable
       $(document).ready(function () {
         $('#sebastian').DataTable({
-          
-        });
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+      });
     });
       $(document).ready(function () {
         $('#evaluacion').DataTable({
-          
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
         });
     });
 

@@ -58,7 +58,7 @@
           </div>
         {% endif %}
         <div class="input-group mt-1">
-          <a class="btn btn-dark" href="{% url "planeacion:rege_evaluacion" %}">Gestion Evaluacion</a>
+          <a class="btn btn-secondary" href="{% url "planeacion:rege_evaluacion" %}">Gestion Evaluacion</a>
         </div>
       </div>
       <div class="card-body">
@@ -83,8 +83,9 @@
                   <td class="text-capitalcase">{{ info.ultima_telemedida }}</td>
                   <td class="text-capitalcase">{{ info.conforme }}</td>
                   <td>                    
-                    <div class="contenedorBotones"><button class="btn-dark botones">Modificar Evaluacion</button>
-                      <button class="btn-danger botones"  type="button">Eliminar Evaluacion</button>
+                    <div class="contenedorBotones">
+                      <button class="btn-primary botonesFormularios">Modificar Evaluacion</button>
+                      <button class="btn-primary botonesFormularios"  type="button">Eliminar Evaluacion</button>
                     </div>
                   </td>
                 </tr>

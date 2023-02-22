@@ -29,4 +29,8 @@ body {
   width: 100%;
   background-color: #f96b07;
   border-color: #f96b07;
+  font-size: 13px;
+}
+.text-capitalcase {
+  font-size: 13px;
 }

@@ -21,7 +21,7 @@
           </div>
         {% endif %}
         <div class="input-group mt-1">
-          <a class="btn btn-dark" href="{% url "planeacion:regehacer" %}">Nuevo Hacer</a>
+          <a class="btn btn-secondary" href="{% url "planeacion:regehacer" %}">Nuevo Hacer</a>
         </div>
       </div>
       <div class="card-body">
@@ -53,12 +53,8 @@
                   <td class="text-capitalcase">{{ info.pagar }}</td>
                   <td>
                     <div class="contenedorBotones">
-                      <button class="btn-dark botones">
-                        Modificar Hacer
-                      </button>
-                      <button class="btn-danger botones"  type="button">
-                        Eliminar Hacer
-                      </button>
+                      <button class="btn-primary botonesFormularios" type="button">Modificar Hacer</button>
+                      <button class="btn-primary botonesFormularios" type="button">Eliminar Hacer</button>
                     </div>
                   </td>
                 </tr>

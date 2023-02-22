@@ -11,7 +11,7 @@
     </small>
     <div class="card shadow mt-3">
       <div class="card-header py-3">
-        <p class="text-primary m-0 text-gray-600 text-uppercase">Listado Eventos</p>
+        <small class="text-primary m-0 text-gray-600 text-uppercase">Listado Eventos</small>
         {% if info == "OK" %}
           <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>Informacion</strong> Se agrego informacion correctamente.
@@ -31,7 +31,7 @@
         </div>
         {% endif %}
         <div class="input-group mt-1">
-          <a class="btn btn-dark" href="{% url "planeacion:registrar_eventos" %}">Nuevo Evento</a>
+          <a class="btn btn-secondary" href="{% url "planeacion:registrar_eventos" %}">Nuevo Evento</a>
         </div>
       </div>
       <div class="card-body">
@@ -65,12 +65,8 @@
                   <td class="text-capitalcase">{{ info.contrata }}</td>
                   <td>
                     <div class="contenedorBotones">
-                      <button class="btn-dark botones">
-                        Modificar Evento
-                      </button>
-                      <button class="btn-danger botones"  type="button">
-                        Eliminar Evento
-                      </button>
+                      <button class="btn-primary botonesFormularios" type="button">Modificar Evento</button>
+                      <button class="btn-primary botonesFormularios" type="button">Eliminar Evento</button>
                     </div>
                   </td>
                 </tr>

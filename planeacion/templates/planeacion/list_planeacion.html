@@ -3,14 +3,13 @@
 {% block content %}
 
 <div class="container-fluid mt-5">
-    <h6 class="text-dark text-gray-600 text-uppercase">Registro de Eventos</h6>
+    <h6 class="text-dark text-gray-600 text-uppercase">Registro Programador Medida Especial</h6>
     <small class="form-text1">
-      Rol: Este modulo permite registrar todos los eventos que no se pueda generar
-      una OT por algun motivo
+      Programador medida especial, permite realizar registro de una OT a la cual se le va a llevar un control de tooda su ejecucion.
     </small>
     <div class="card shadow mt-3">
       <div class="card-header py-3">
-        <p class="text-primary m-0 text-gray-600 text-uppercase">Listado Eventos</p>
+        <p class="text-primary m-0 text-gray-600 text-uppercase">Listado Programacion</p>
         {% if info %}
           
           <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -23,7 +22,7 @@
           
         {% endif %}
         <div class="input-group mt-1">
-          <a class="btn btn-dark" href="{% url "planeacion:reg_planeacion" %}">Nueva Planeacion</a>
+          <a class="btn btn-secondary" href="{% url "planeacion:reg_planeacion" %}">Nueva Planeacion</a>
         </div>
       </div>
       <div class="card-body">
@@ -47,8 +46,8 @@
                   <td class="text-capitalcase">{{ info.estado }}</td>
                   <td>
                     <div class="contenedorBotones">
-                      <button class="btn-dark botones">Modificar Evento</button>
-                      <button class="btn-danger botones"  type="button">Eliminar Evento</button>
+                      <button class="btn-primary botonesFormularios" type="button">Modificar Evento</button>
+                      <button class="btn-primary botonesFormularios" type="button">Eliminar Evento</button>
                     </div>
                   </td>
                 </tr>
