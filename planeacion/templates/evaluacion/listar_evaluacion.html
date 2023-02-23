@@ -11,28 +11,31 @@
           <table id="sebastian" class="display responsive nowrap" style="width: 100%">
             <thead>
               <tr>
-                <th class="text-uppercase">OT</th>
-                <th class="text-uppercase">Fuente</th>
-                <th class="text-uppercase">Fecha</th>
-                <th class="text-uppercase">Estado</th>
+                <th class="text-uppercase text-center">OT</th>
+                <th class="text-uppercase text-center">Fuente</th>
+                <th class="text-uppercase text-center">Fecha</th>
+                <th class="text-uppercase text-center">Estado</th>
               </tr>
             </thead>
             <tbody>
               {% for info in data %}
                 <tr>
-                  <td class="text-capitalcase">{{ info.orden_trabajo }}</td>
-                  <td class="text-capitalcase">{{ info.fuente }}</td>
-                  <td class="text-capitalcase">{{ info.fecha_programacion }}</td>
-                  <td class="text-capitalcase">{{ info.estado }}</td>
+                  <td class="text-capitalcase text-center">{{ info.orden_trabajo }}</td>
+                  <td class="text-capitalcase text-center">{{ info.fuente }}</td>
+                  <td class="text-capitalcase text-center">{{ info.fecha_programacion }}</td>
+                  <td class="text-capitalcase text-center">
+                    <span class="text-capitalcase badge bg-gradient-danger text-center">{{ info.estado }}</span>
+                    
+                  </td>
                 </tr>
               {% endfor %}
             </tbody>
             <tfoot>
               <tr>
-                <th class="text-uppercase">OT</th>
-                <th class="text-uppercase">Fuente</th>
-                <th class="text-uppercase">Fecha</th>
-                <th class="text-uppercase">Estado</th>
+                <th class="text-uppercase text-center">OT</th>
+                <th class="text-uppercase text-center">Fuente</th>
+                <th class="text-uppercase text-center">Fecha</th>
+                <th class="text-uppercase text-center">Estado</th>
               </tr>
             </tfoot>
           </table>

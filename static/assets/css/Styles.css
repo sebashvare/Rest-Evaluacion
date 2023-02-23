@@ -27,8 +27,9 @@ body {
 
 .botonesFormularios {
   width: 100%;
-  background-color: #f96b07;
-  border-color: #f96b07;
+  background-color: #D9D9D9;
+  border-color: #D9D9D9;
+  color: black;
   font-size: 13px;
 }
 .text-capitalcase {

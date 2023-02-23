@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}
+  Confiabilidad | Evaluacion
+{% endblock title %}
+{% block content %}
+{% load static %}  
+<div class="container-fluid mt-5">
+    <div class="card shadow mt-3">
+      <div class="card-header py-3">
+        <small class="text-uppercase">Listado Confiabilidad</small>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <table id="sebastian" class="display responsive nowrap" style="width: 100%">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-center">OT</th>
+                <th class="text-uppercase text-center">Valor tensiones</th>
+                <th class="text-uppercase text-center">Valor Corrientes</th>
+                <th class="text-uppercase text-center">Estado</th>
+                <th class="text-uppercase text-center">sincro_fecha</th>
+                <th class="text-uppercase text-center">Fasorial</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for plan in data %}
+                <tr>
+                  <td class="text-capitalcase text-center">{{ plan.orden_trabajo }}</td>
+                  <td class="text-capitalcase text-center">{{ plan.valor_tensiones }}</td>
+                  <td class="text-capialcase text-center">{{ plan.valor_corrientes }}</td>
+                  {% if plan.orden_trabajo.estado == "PENDIENTE HACER" %}
+                  <td class="text-capitalcase text-center">
+                    <span class="text-capitalcase badge bg-success text-center">{{ plan.orden_trabajo.estado }}</span>
+                  </td>
+                  {% else %} 
+                  <td class="text-capitalcase text-center">
+                    <span class="text-capitalcase badge bg-gradient-danger text-center">{{ plan.orden_trabajo.estado }}</span>
+                  </td>
+                  {% endif %}
+                  <td class="text-capialcase text-center">{{ plan.sincro_fecha }}</td>
+                  <td class="text-capialcase text-center">
+                    <a href="{{ plan.cargue_fasorial.url }}">{{ plan.cargue_fasorial.name }}</a>
+                </td>
+                </tr>
+                
+              {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th class="text-uppercase text-center">OT</th>
+                <th class="text-uppercase text-center">Valor tensiones</th>
+                <th class="text-uppercase text-center">Valor Corrientes</th>
+                <th class="text-uppercase text-center">Estado</th>
+                <th class="text-uppercase text-center">sincro_fecha</th>
+                <th class="text-uppercase text-center">Fasorial</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

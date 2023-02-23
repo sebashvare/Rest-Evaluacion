@@ -3,14 +3,15 @@ from django.urls import reverse
 from rest_framework.decorators import api_view
 from .serializer import HacerSerializer, PlaneacionSerializer
 from rest_framework import viewsets
-from .models import Hacer, Planeacion, Backlog, Evaluacion
+from .models import Hacer, Planeacion, Backlog, Evaluacion, Confiabilidad
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core import serializers
 import planeacion.variables as var
 
 """
-Librerias EMAIL
+	Librerias EMAIL: Con estas librerias permitimos enviar correos electronicos para notificiacion 
+	de cambios de flujo.
 """
 
 import smtplib
@@ -97,7 +98,7 @@ def save_planeacion(request):
                 fuente=origen,
                 contrata=contrata,
                 fecha_programacion=date.today(),
-                estado="PENDIENTE"
+                estado="PENDIENTE HACER"
             )
             data.save()
             informacion_total = Planeacion.objects.all()
@@ -558,12 +559,13 @@ def save_planeacion(request):
 
 
 def list_hacer(request):
+    planeacion = Planeacion.objects.filter(estado = "PENDIENTE HACER")
     data = Hacer.objects.all()
-    return render(request, "hacer/list_hacer.html", {"data": data})
+    return render(request, "hacer/list_hacer.html", {"data": data, "planeacion": planeacion})
 
 
 def registrar_hacer(request):
-    data_planeacion = Planeacion.objects.filter(estado="PENDIENTE")
+    data_planeacion = Planeacion.objects.filter(estado="PENDIENTE HACER")
     return render(request, "hacer/registrar_hacer.html", {"data": data_planeacion})
 
 
@@ -607,7 +609,7 @@ def registrar_evaluacion(request):
 
 
 def save_evaluacion(request):
-    
+
     if request.method == "POST":
         orden_OT = request.POST.get("orde_OT_eva")
         primera_factura = request.POST.get("primera_factura")
@@ -627,8 +629,16 @@ def save_evaluacion(request):
 		Querys: Consulto la tabla Planeacion para listar nuevamente los clientes Pendientes por estado de Evaluacion
 		Querys: Consulto la tabla Evaluacion para listar todos los registros de la Evaluacion
   		"""
-        data_planeacion = Planeacion.objects.filter(estado="PENDIENTE EVALUACION")
+        data_planeacion = Planeacion.objects.filter(
+            estado="PENDIENTE EVALUACION")
         data_evaluacion = Evaluacion.objects.all()
         info = True
         return render(request, "evaluacion/listar_evaluacion.html", {"data": data_planeacion, "data_evaluacion": data_evaluacion, "info": info})
     return render(request, "evaluacion/listar_evaluacion.html", {"data": data_planeacion, "data_evaluacion": data_evaluacion, "info": False})
+
+
+def list_confiabilidad(request):
+    data_confiabilidad = Confiabilidad.objects.all()
+    return render(request, "confiabilidad/listar_confiabilidad.html", {"data": data_confiabilidad})
+    
+    

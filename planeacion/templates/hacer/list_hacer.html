@@ -4,6 +4,53 @@
 {% endblock title %}
 {% block content %}
   <div class="container-fluid mt-5">
+    <div class="card shadow mt-3">
+      <div class="card-header py-3">
+        <small class="text-uppercase">Pendientes Hacer</small>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <table id="sebastian" class="display responsive nowrap" style="width: 100%">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-center">OT</th>
+                <th class="text-uppercase text-center">Fuente</th>
+                <th class="text-uppercase text-center">Fecha</th>
+                <th class="text-uppercase text-center">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for plan in planeacion %}
+                <tr>
+                  <td class="text-capitalcase text-center">{{ plan.orden_trabajo }}</td>
+                  <td class="text-capitalcase text-center">{{ plan.fuente }}</td>
+                  <td class="text-capitalcase text-center">{{ plan.fecha_programacion }}</td>
+                  {% if plan.estado == "PENDIENTE HACER" %}
+                  <td class="text-capitalcase text-center">
+                    <span class="text-capitalcase badge bg-success text-center">{{ plan.estado }}</span>
+                  </td>
+                  {% else %} 
+                  <td class="text-capitalcase text-center">
+                    <span class="text-capitalcase badge bg-gradient-danger text-center">{{ plan.estado }}</span>
+                  </td>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th class="text-uppercase text-center">OT</th>
+                <th class="text-uppercase text-center">Fuente</th>
+                <th class="text-uppercase text-center">Fecha</th>
+                <th class="text-uppercase text-center">Estado</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt-5">
     <h6 class="text-dark text-gray-600 text-uppercase">Registro del Hacer</h6>
     <small class="form-text1">
       Rol: Este modulo permite registrar el avance de la revision de la OT que se registro en el modulo de planeacion
@@ -26,56 +73,113 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <table id="sebastian" class="display responsive nowrap" style="width: 100%">
+          <table id="evaluacion" class="display responsive nowrap" style="width: 100%">
             <thead>
               <tr>
-                <th class="text-uppercase">ID</th>
-                <th class="text-uppercase">Orden Trabajo</th>
-                <th class="text-uppercase">Actividad Ejecutada</th>
-                <th class="text-uppercase">Numero Formato</th>
-                <th class="text-uppercase">Multiplo</th>
-                <th class="text-uppercase">Telemedida</th>
-                <th class="text-uppercase">Actualizacion Sistema</th>
-                <th class="text-uppercase">Pagar</th>
-                <th class="text-uppercase">Acciones</th>
-             </tr>
+                <th class="text-uppercase text-center">ID</th>
+                <th class="text-uppercase text-center">Orden Trabajo</th>
+                <th class="text-uppercase text-center">Actividad Ejecutada</th>
+                <th class="text-uppercase text-center">Numero Formato</th>
+                <th class="text-uppercase text-center">Multiplo</th>
+                <th class="text-uppercase text-center">Telemedida</th>
+                <th class="text-uppercase text-center">Actualizacion Sistema</th>
+                <th class="text-uppercase text-center">
+                  Pagar
+                </th>
+                <th class="text-uppercase text-center">
+                  Estado Actual
+                </th>
+                <th class="text-uppercase text-center">
+                  Acciones
+                </th>
+              </tr>
             </thead>
             <tbody>
               {% for info in data %}
                 <tr>
-                  <td class="text-capitalcase">{{ info.pk }}</td>
-                  <td class="text-capitalcase">{{ info.orden_trabajo }}</td>
-                  <td class="text-capitalcase">{{ info.actividad_ejecutada }}</td>
-                  <td class="text-capitalcase">{{ info.numero_formato }}</td>
-                  <td class="text-capitalcase">{{ info.multiplo }}</td>
-                  <td class="text-capitalcase">{{ info.telemedida }}</td>
-                  <td class="text-capitalcase">{{ info.actualizac0ion_sistema }}</td>
-                  <td class="text-capitalcase">{{ info.pagar }}</td>
+                  <td class="text-capitalcase text-center">
+                    {{ info.pk }}
+                  </td>
+                  <td class="text-capitalcase text-center">
+                    {{ info.orden_trabajo }}
+                  </td>
+                  <td class="text-capitalcase text-center">
+                    {{ info.actividad_ejecutada }}
+                  </td>
+                  <td class="text-capitalcase text-center">
+                    {{ info.numero_formato }}
+                  </td>
+                  <td class="text-capitalcase text-center">
+                    {{ info.multiplo }}
+                  </td>
+                  <td class="text-capitalcase text-center">
+                    {{ info.telemedida }}
+                  </td>
+                  <td class="text-capitalcase text-center">
+                    {{ info.actualizac0ion_sistema }}
+                  </td>
+                  <td class="text-capitalcase text-center">
+                    {{ info.pagar }}
+                  </td>
+                  {% if info.orden_trabajo.estado == "TERMINADO" %}
+                    <td class="text-capitalcase text-center">
+                      <span class="text-capitalcase badge bg-gradient-secondary text-center">{{ info.orden_trabajo.estado }}</span>
+                    </td>
+                  {% else %}
+                    <td class="text-capitalcase text-center">
+                      <span class="text-capitalcase badge bg-gradient-danger text-center">{{ info.orden_trabajo.estado }}</span>
+                    </td>
+                  {% endif %}
                   <td>
                     <div class="contenedorBotones">
-                      <button class="btn-primary botonesFormularios" type="button">Modificar Hacer</button>
-                      <button class="btn-primary botonesFormularios" type="button">Eliminar Hacer</button>
+                      <button class="btn-primary botonesFormularios" type="button">
+                        Modificar Hacer
+                      </button>
+                      <button class="btn-primary botonesFormularios" type="button">
+                        Eliminar Hacer
+                      </button>
                     </div>
                   </td>
                 </tr>
               {% endfor %}
             </tbody>
             <tfoot>
-            <tr>
-              <th class="text-uppercase">ID</th>
-              <th class="text-uppercase">Orden Trabajo</th>
-              <th class="text-uppercase">Actividad Ejecutada</th>
-              <th class="text-uppercase">Numero Formato</th>
-              <th class="text-uppercase">Multiplo</th>
-              <th class="text-uppercase">Telemedida</th>
-              <th class="text-uppercase">Actualizacion Sistema</th>
-              <th class="text-uppercase">Pagar</th>
-              <th class="text-uppercase">Acciones</th>
-            </tr>
-            </tfoot>
-          </table>
-        </div>
+              <tr>
+                <th class="text-uppercase text-center">
+                  ID
+                </th>
+                <th class="text-uppercase text-center">
+                  Orden Trabajo
+                </th>
+                <th class="text-uppercase text-center">
+                  Actividad Ejecutada
+                </th>
+                <th class="text-uppercase text-center">
+                  Numero Formato
+                </th>
+                <th class="text-uppercase text-center">
+                  Multiplo
+                </th>
+                <th class="text-uppercase text-center">
+                  Telemedida
+                </th>
+                <th class="text-uppercase text-center">
+                  Actualizacion Sistema
+                </th>
+                <th class="text-uppercase text-center">
+                  Pagar
+                </th>
+                <th class="text-uppercase text-center">
+                  Estado Actual
+                </th>
+                <th class="text-uppercase text-center">
+                  Acciones
+                </th>
+              </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
   </div>
+</div>
 {% endblock content %}

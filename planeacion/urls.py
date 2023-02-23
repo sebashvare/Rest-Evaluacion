@@ -1,5 +1,8 @@
-from django.urls import path
+from django.urls import path, re_path
 from rest_framework.routers import DefaultRouter
+from django.conf import settings
+from django.views.static import serve
+
 from . import views
 
 app_name = "planeacion"
@@ -21,7 +24,13 @@ urlpatterns = [
     path("evaluacion", views.list_evaluacion, name="evaluacion"),
     path("regevaluacion", views.registrar_evaluacion, name="rege_evaluacion"),
     path("saveevaluacion", views.save_evaluacion, name="save_evaluacion"),
+    path("listconfiabilidad", views.list_confiabilidad, name="listconfiabilidad"),
 ]
 
 
 urlpatterns += router.urls
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve,{
+        'document_root': settings.MEDIA_ROOT,
+    })
+]
