@@ -19,15 +19,18 @@ class Planeacion(models.Model):
     contrata = models.CharField(max_length=20)
     fecha_programacion = models.DateField()
     estado = models.CharField(max_length=20)
-
+    
+    class Meta:
+        verbose_name = 'Planeacion'
+        verbose_name_plural = 'Modulo Planeacion'
 
     def __str__(self):
         return str(self.orden_trabajo)
-    
 
 
 class Hacer(models.Model):
-    orden_trabajo = models.ForeignKey(Planeacion, related_name="hacers", on_delete=models.CASCADE)
+    orden_trabajo = models.ForeignKey(
+        Planeacion, related_name="hacers", on_delete=models.CASCADE)
     actividad_ejecutada = models.CharField(max_length=250)
     numero_formato = models.CharField(max_length=20)
     multiplo = models.CharField(max_length=15)
@@ -37,6 +40,9 @@ class Hacer(models.Model):
     """
         Un campo que defina el estado de la actividad y enviar al Backlog
     """
+    class Meta:
+        verbose_name = 'Hacer'
+        verbose_name_plural = 'Modulo Hacer'
 
     def __str__(self):
         return str(self.orden_trabajo) + '-' + str(self.actividad_ejecutada)
@@ -48,11 +54,16 @@ class Evaluacion(models.Model):
     ultima_telemedida = models.DateField()
     conforme = models.CharField(max_length=150)
 
+    class Meta:
+        verbose_name = 'Evaluacion'
+        verbose_name_plural = 'Modulo Evaluacion'
+
     def __str__(self):
         return self.orden_trabajo + "-" + self.conforme
 
     def __unicode__(self):
         return
+
 
 class Backlog(models.Model):
     """
@@ -66,19 +77,19 @@ class Backlog(models.Model):
     estado = models.CharField(("Estado Alerta"), max_length=50)
     responsable = models.CharField(("Quien Resuelve"), max_length=200)
     contrata = models.CharField(("Contratista"), max_length=200)
-       
-    
+
+    class Meta:
+        verbose_name = 'Backlog'
+        verbose_name_plural = 'Backlogs'
+
     def __str__(self):
         return "{}-{}".format(str(self.id_punto_servicio), str(self.ejecucion))
-    
+
     def save(self, *args, **kwargs):
         self.estado = "Pendiente"
         super().save(*args, **kwargs)
 
-    class Meta:
-        verbose_name = 'Backlog'
-        verbose_name_plural = 'Backlog'
-        
+
 class Confiabilidad(models.Model):
     """
         Este modelo hace referencia a Confiabilidad, se tiene como informacion principal
@@ -89,5 +100,11 @@ class Confiabilidad(models.Model):
     valor_corrientes = models.DecimalField(("Valor Corrientes"), max_digits=5, decimal_places=2)
     sincro_fecha = models.BooleanField(("Sincronizacion Fecha y Hora"))
     validacion_canales = models.BooleanField(("Validacion Canales"))
-    cargue_fasorial =models.FileField(("Fasorial"), upload_to="fasorial")
+    cargue_fasorial = models.FileField(("Fasorial"), upload_to="fasorial")
+    class Meta:
+        verbose_name = 'Confiabilidad'
+        verbose_name_plural = 'Modulo Confiabilidad'
     
+    
+    def __str__(self):
+        return f"{self.orden_trabajo}"
