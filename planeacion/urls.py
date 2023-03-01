@@ -25,6 +25,7 @@ urlpatterns = [
     path("regevaluacion", views.registrar_evaluacion, name="rege_evaluacion"),
     path("saveevaluacion", views.save_evaluacion, name="save_evaluacion"),
     path("listconfiabilidad", views.list_confiabilidad, name="listconfiabilidad"),
+    path("regconfiabilidad", views.registrar_confiabilidad, name="regconfiabilidad"),
 ]
 
 

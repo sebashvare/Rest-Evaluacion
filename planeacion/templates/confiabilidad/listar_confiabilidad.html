@@ -7,11 +7,67 @@
 <div class="container-fluid mt-5">
     <div class="card shadow mt-3">
       <div class="card-header py-3">
-        <small class="text-uppercase">Listado Confiabilidad</small>
+        <small class="text-uppercase">Listado Pendiente Confiabilidad</small>
       </div>
       <div class="card-body">
         <div class="row">
           <table id="sebastian" class="display responsive nowrap" style="width: 100%">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-center">OT</th>
+                <th class="text-uppercase text-center">Fuente</th>
+                <th class="text-uppercase text-center">Valor Corrientes</th>
+                <th class="text-uppercase text-center">contrata</th>
+                <th class="text-uppercase text-center">fecha_programacion</th>
+                <th class="text-uppercase text-center">estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for plan in pendientes_planeacion %}
+                <tr>
+                  <td class="text-capitalcase text-center">{{ plan.orden_trabajo }}</td>
+                  <td class="text-capitalcase text-center">{{ plan.fuente }}</td>
+                  <td class="text-capialcase text-center">{{ plan.contrata }}</td>
+                  {% if plan.orden_trabajo.estado == "PENDIENTE EVALUACION" %}
+                  <td class="text-capitalcase text-center">
+                    <span class="text-capitalcase badge bg-success text-center">{{ plan.estado }}</span>
+                  </td>
+                  {% else %} 
+                  <td class="text-capitalcase text-center">
+                    <span class="text-capitalcase badge bg-gradient-danger text-center">{{ plan.estado }}</span>
+                  </td>
+                  {% endif %}
+                  <td class="text-capialcase text-center">{{ plan.fecha_programacion }}</td>
+                </tr>
+                
+              {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th class="text-uppercase text-center">OT</th>
+                <th class="text-uppercase text-center">Fuente</th>
+                <th class="text-uppercase text-center">Valor Corrientes</th>
+                <th class="text-uppercase text-center">contrata</th>
+                <th class="text-uppercase text-center">fecha_programacion</th>
+                <th class="text-uppercase text-center">estado</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="container-fluid mt-5">
+    <div class="card shadow mt-3">
+      <div class="card-header py-3">
+        <small class="text-uppercase">Listado Confiabilidad</small>
+      </div>
+      <div class="card-body">
+        <div class="input-group mt-1 mb-3">
+          <a class="btn btn-secondary" href="{% url "planeacion:regconfiabilidad" %}">Nuevo Registro Confiabilidad</a>
+        </div>
+        <div class="row">
+          <table id="evaluacion" class="display responsive nowrap" style="width: 100%">
             <thead>
               <tr>
                 <th class="text-uppercase text-center">OT</th>

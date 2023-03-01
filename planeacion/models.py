@@ -19,7 +19,7 @@ class Planeacion(models.Model):
     contrata = models.CharField(max_length=20)
     fecha_programacion = models.DateField()
     estado = models.CharField(max_length=20)
-    
+
     class Meta:
         verbose_name = 'Planeacion'
         verbose_name_plural = 'Modulo Planeacion'
@@ -73,7 +73,8 @@ class Backlog(models.Model):
     fuente = models.CharField(("Quien reporta"), max_length=50)
     reporte = models.CharField(("Que reporta"), max_length=250)
     id_punto_servicio = models.CharField(("ID Punto Servicio"), max_length=15)
-    ejecucion = models.CharField(("Quien ejecuta la actividad"), max_length=200)
+    ejecucion = models.CharField(
+        ("Quien ejecuta la actividad"), max_length=200)
     estado = models.CharField(("Estado Alerta"), max_length=50)
     responsable = models.CharField(("Quien Resuelve"), max_length=200)
     contrata = models.CharField(("Contratista"), max_length=200)
@@ -95,16 +96,34 @@ class Confiabilidad(models.Model):
         Este modelo hace referencia a Confiabilidad, se tiene como informacion principal
         La OT generada por el modulo de PLaneacion
     """
+    CONEXIONADO = [
+        ("SEMI", "SEMI"),
+        ("DIRECTA", "DIRECTA"),
+        ("INDIRECTA", "INDIRECTA"),
+        ("GENERACION", "GENERACION")
+    ]
+
     orden_trabajo = models.ForeignKey(Planeacion,  on_delete=models.CASCADE)
-    valor_tensiones = models.DecimalField(("Valor Tensiones"), max_digits=5, decimal_places=2)
-    valor_corrientes = models.DecimalField(("Valor Corrientes"), max_digits=5, decimal_places=2)
+    valor_tensiones_a = models.DecimalField(("Valor Tensiones a"), max_digits=5, decimal_places=2)
+    valor_tensiones_b = models.DecimalField(("Valor Tensiones b"), max_digits=5, decimal_places=2)
+    valor_tensiones_c = models.DecimalField(("Valor Tensiones c"), max_digits=5, decimal_places=2)
+    promedio_tensiones = models.DecimalField(("Promedio Tensiones"), max_digits=5, decimal_places=2)
+    valor_corrientes_a = models.DecimalField(("Valor Corrientes a"), max_digits=5, decimal_places=2)
+    valor_corrientes_b = models.DecimalField(("Valor Corrientes b"), max_digits=5, decimal_places=2)
+    valor_corrientes_c = models.DecimalField(("Valor Corrientes c"), max_digits=5, decimal_places=2)
+    promedio_corrientes = models.DecimalField(("Promedio Corrientes"), max_digits=5, decimal_places=2)
+    angulos_corriente_ia = models.DecimalField(("Angulos Corrientes IA"), max_digits=5, decimal_places=2)
+    angulos_corriente_ib = models.DecimalField(("Angulos Corrientes IB"), max_digits=5, decimal_places=2)
+    angulos_corriente_ic = models.DecimalField(("Angulos Corrientes IC"), max_digits=5, decimal_places=2)
     sincro_fecha = models.BooleanField(("Sincronizacion Fecha y Hora"))
     validacion_canales = models.BooleanField(("Validacion Canales"))
     cargue_fasorial = models.FileField(("Fasorial"), upload_to="fasorial")
+    conexionado = models.CharField(("Conexionado"), max_length=15, choices=CONEXIONADO)
+    
+
     class Meta:
         verbose_name = 'Confiabilidad'
         verbose_name_plural = 'Modulo Confiabilidad'
-    
-    
+
     def __str__(self):
         return f"{self.orden_trabajo}"

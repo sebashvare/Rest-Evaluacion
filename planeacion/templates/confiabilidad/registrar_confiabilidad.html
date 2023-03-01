@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}
+  Registro Confiabilidad | Evalaucion
+{% endblock title %}
+{% block content %}
+  <div class="container-fluid">
+    <h6 class="text-dark text-gray-600 text-uppercase">Registro Confiabilidad</h6>
+    <small class="form-text1">Rol: Se registra el avance de las OT registradas en el modulo de Planeacion.</small>
+    <div class="card shadow mt-3">
+      <div class="card-header py-3">
+        <p class="text-primary m-0 text-gray-600 text-uppercase">Registro Confiabilidad</p>
+      </div>
+      <div class="card-body">
+        <form name="hacer" action="{% url 'planeacion:save_hacer' %}" method="post" onsubmit="return validacion_formulario_hacer()">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col prueba">
+              <div class="input-group mt-1">
+                <strong><small class="text-uppercase">Orden de trabajo</small></strong>
+              </div>
+              <div class="input-group mt-1">
+                <select class="form-select form-select-sm" name="confiabilidad_OT" id="confiabilidad_OT">
+                  <optgroup label="Quien Reporta">
+                    <option disabled selected value>Seleccione una opcion</option>
+                    {% for datos in data %}
+                        <option value="{{ datos.orden_trabajo }}">{{ datos.orden_trabajo }} - {{ datos.fuente }}</option>
+                    {% endfor %}
+                  </optgroup>
+                </select>
+              </div>
+              <hr/>
+              <div class="input-group mb-2">
+                <strong><small class="text-uppercase">Valor Tensiones</small></strong>
+              </div>
+              <div class="input-group mt-1">
+                <input class="form-control form-control-sm"
+                       type="number"
+                       placeholder="Tension A"
+                       name="confiabilidad_tension_a"
+                       id="confiabilidad_tension_a"/>
+                <input class="form-control form-control-sm"
+                       type="number"
+                       placeholder="Tension B"
+                       name="confiabilidad_tension_b"
+                       id="confiabilidad_tension_b"/>
+                <input class="form-control form-control-sm"
+                       type="number"
+                       placeholder="Tension C"
+                       name="confiabilidad_tension_c"
+                       id="confiabilidad_tension_c"/>
+                <input class="form-control form-control-sm"
+                       type="number"
+                       placeholder="Promedio Tensiones"
+                       name="confiabilidad_promedio_tension"
+                       id="confiabilidad_promedio_tension"/>
+              </div>
+              
+              <div class="input-group mt-2 mb-2">
+                <strong><small class="text-uppercase">Valor Corrientes</small></strong>
+              </div>
+              <div class="input-group mt-1">
+                <input class="form-control form-control-sm"
+                       type="number"
+                       placeholder="Corriente A"
+                       name="confiabilidad_corrientes_a"
+                       id="confiabilidad_corrientes_a"/>
+                <input class="form-control form-control-sm"
+                       type="number"
+                       placeholder="Corriente B"
+                       name="confiabilidad_corrientes_b"
+                       id="confiabilidad_corrientes_b"/>
+                <input class="form-control form-control-sm"
+                       type="number"
+                       placeholder="Corriente C"
+                       name="confiabilidad_corrientes_c"
+                       id="confiabilidad_corrientes_c"/>
+                <input class="form-control form-control-sm"
+                       type="number"
+                       placeholder="Promedio Corrientes"
+                       name="confiabilidad_corrientes_promedio"
+                       id="confiabilidad_corrientes_promedio"/>
+              </div>
+              <hr/>
+              <div class="input-group mb-2">
+                <strong><small class="text-uppercase">Seleccione las siguientes opciones</small></strong>
+              </div>
+              <div class="input-group">
+                <div class="form-check m-1">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                        <label class="form-check-label" for="flexCheckIndeterminate">Sincronizacion Fecha Y Hora</label>
+                </div>
+                <div class="form-check m-1">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                        <label class="form-check-label" for="flexCheckIndeterminate">Validacion Canales</label>
+                </div>
+              </div>
+              <hr/>
+              <div class="input-group mb-2">
+                <strong><small class="text-uppercase">Actualizacion Sistema</small></strong>
+              </div>
+              <div class="input-group mt-2">
+                <input class="form-control" type="file" id="formFile">
+              </div>
+             <div class="input-group mt-3">
+                <button class="btn btn-primary text-uppercase botonesFormularios" type="submit">Guardar Informacion</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

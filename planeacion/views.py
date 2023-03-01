@@ -639,6 +639,10 @@ def save_evaluacion(request):
 
 def list_confiabilidad(request):
     data_confiabilidad = Confiabilidad.objects.all()
-    return render(request, "confiabilidad/listar_confiabilidad.html", {"data": data_confiabilidad})
-    
+    data_pendiente_confiabilidad = Planeacion.objects.filter(estado = "PENDIENTE CONFIABILIDAD")
+    return render(request, "confiabilidad/listar_confiabilidad.html", {"data": data_confiabilidad, "pendientes_planeacion": data_pendiente_confiabilidad})
+
+def registrar_confiabilidad(request):
+    data_pendiente_confiabilidad = Planeacion.objects.filter(estado = "PENDIENTE CONFIABILIDAD")
+    return render(request, "confiabilidad/registrar_confiabilidad.html", {"data": data_pendiente_confiabilidad})
     
