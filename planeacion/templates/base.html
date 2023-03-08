@@ -59,7 +59,9 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'planeacion:evaluacion' %}"><i class="fas fa-table"></i><span>Modulo Evaluacion</span></a>
+              <a class="nav-link" href="{% url 'planeacion:evaluacion' %}">
+                <i class="fas fa-table"></i><span>Modulo Evaluacion</span>
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'planeacion:listconfiabilidad' %}">
@@ -227,11 +229,8 @@
                         >&nbsp;Activity log</a
                       >
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#"
-                        ><i
-                          class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"
-                        ></i
-                        >&nbsp;Logout</a
+                      <a class="dropdown-item" href="{% url 'planeacion:logout' %}">
+                        <iclass="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a
                       >
                     </div>
                   </div>

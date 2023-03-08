@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core import serializers
 import planeacion.variables as var
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 """
@@ -30,15 +30,18 @@ class getHacer(viewsets.ModelViewSet):
     queryset = Hacer.objects.all()
     serializer_class = HacerSerializer
 
+
 @login_required
 def listPlaneacion(request):
     listado_planeacion = Planeacion.objects.all()
     return render(request, "planeacion/list_planeacion.html", {"data": listado_planeacion})
 
+
 @login_required
 def list_backlog(request):
     data = Backlog.objects.all()
     return render(request, "eventos/listar_eventos.html", {"data": data})
+
 
 @login_required
 def list_backlog_json(request):
@@ -46,9 +49,11 @@ def list_backlog_json(request):
     json = serializers.serialize('json', data)
     return HttpResponse(json, content_type='application/json')
 
+
 @login_required
 def registrar_eventos(request):
     return render(request, "eventos/registrar_eventos.html", {})
+
 
 @login_required
 def save_eventos(request):
@@ -81,9 +86,11 @@ def save_eventos(request):
             agregado = "ERROR"
             return render(request, "eventos/listar_eventos.html", {"data": data, "info": agregado})
 
+
 @login_required
 def registrar_planeacion(request):
     return render(request, "planeacion/formulario_planeacion.html", {})
+
 
 @login_required
 def save_planeacion(request):
@@ -559,16 +566,19 @@ def save_planeacion(request):
             informacion_total = Planeacion.objects.all()
             return render(request, "planeacion/list_planeacion.html", {"data": informacion_total, "info": resultado})
 
+
 @login_required
 def list_hacer(request):
     planeacion = Planeacion.objects.filter(estado="PENDIENTE HACER")
     data = Hacer.objects.all()
     return render(request, "hacer/list_hacer.html", {"data": data, "planeacion": planeacion})
 
+
 @login_required
 def registrar_hacer(request):
     data_planeacion = Planeacion.objects.filter(estado="PENDIENTE HACER")
     return render(request, "hacer/registrar_hacer.html", {"data": data_planeacion})
+
 
 @login_required
 def save_hacer(request):
@@ -598,16 +608,19 @@ def save_hacer(request):
         return render(request, "hacer/list_hacer.html", {"data": info})
     return render(request, "hacer/list_hacer.html", {"data": info})
 
+
 @login_required
 def list_evaluacion(request):
     data = Planeacion.objects.filter(estado="PENDIENTE EVALUACION")
     data_evaluacion = Evaluacion.objects.all()
     return render(request, "evaluacion/listar_evaluacion.html", {"data": data, "data_evaluacion": data_evaluacion})
 
+
 @login_required
 def registrar_evaluacion(request):
     data_evaluacion = Planeacion.objects.filter(estado="PENDIENTE EVALUACION")
     return render(request, "evaluacion/registrar_evaluacion.html", {"data": data_evaluacion})
+
 
 @login_required
 def save_evaluacion(request):
@@ -638,33 +651,45 @@ def save_evaluacion(request):
         return render(request, "evaluacion/listar_evaluacion.html", {"data": data_planeacion, "data_evaluacion": data_evaluacion, "info": info})
     return render(request, "evaluacion/listar_evaluacion.html", {"data": data_planeacion, "data_evaluacion": data_evaluacion, "info": False})
 
+
 @login_required
 def list_confiabilidad(request):
+    # Metodo que permite listar en l modulo confiabilidad lo que se encuentra pendiente 
     data_confiabilidad = Confiabilidad.objects.all()
-    data_pendiente_confiabilidad = Planeacion.objects.filter(
-        estado="PENDIENTE CONFIABILIDAD")
+    data_pendiente_confiabilidad = Planeacion.objects.filter(estado="PENDIENTE CONFIABILIDAD")
     return render(request, "confiabilidad/listar_confiabilidad.html", {"data": data_confiabilidad, "pendientes_planeacion": data_pendiente_confiabilidad})
+
 
 @login_required
 def registrar_confiabilidad(request):
-    data_pendiente_confiabilidad = Planeacion.objects.filter(
-        estado="PENDIENTE CONFIABILIDAD")
+    # Metodo que permite listar las OT que se encuentran en estado PENDIENTE CONFIABILIDAD en el formulario de Confiabilidad.
+    data_pendiente_confiabilidad = Planeacion.objects.filter(estado="PENDIENTE CONFIABILIDAD")
     return render(request, "confiabilidad/registrar_confiabilidad.html", {"data": data_pendiente_confiabilidad})
 
 
 def formulario_login(request):
+    # Metodo que permite direccionar al formulario Login.
     return render(request, "user/login.html")
 
 
 def login_app(request):
+    # Metodo que permite obtener el valor del formulario para luego validar su usuario y pass para crear la sesion.
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request=request, username=username, password=password)
+        user = authenticate(
+            request=request, username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect("planeacion:listhacer")
         else:
-            return render(request, "user/login.html", {"error": "Informacion Username o Password incorrecto"})
+            return render(request, "user/login.html", {"error": "Username o Password incorrecto"})
 
     return render(request, "user/login.html")
+
+
+@login_required
+def logout_user(request):
+    # Metodo que permite cerrar las Sesion que se encuentra activa
+    logout(request)
+    return redirect("planeacion:login")
