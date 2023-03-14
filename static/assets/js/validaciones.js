@@ -10,11 +10,9 @@ var quienResuelve = "";
 envio_informacion = document.getElementById("guardar-info");
 
 
-
 // Funciones
 
 function habilitarButton() {
-
     envio_informacion.disabled = true;
 }
 /*
@@ -142,11 +140,11 @@ function validacion_formulario_hacer() {
 
 
 
-function validacion_formulario_evaluacion(){
+function validacion_formulario_evaluacion() {
     let ot = document.forms["pruebas"]["orde_OT_eva"].value;
     let primera_factura = document.forms["pruebas"]["primera_factura"].value;
-	let fecha_telemedida = document.forms["pruebas"]["fecha_telemedida"].value;
-	let conforme = document.forms["pruebas"]["conforme"].value;
+    let fecha_telemedida = document.forms["pruebas"]["fecha_telemedida"].value;
+    let conforme = document.forms["pruebas"]["conforme"].value;
     if (ot.length <= 0) {
         alert("Pendiente Diligenciar Orden de Trabajo")
         return false;

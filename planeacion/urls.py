@@ -29,6 +29,7 @@ urlpatterns = [
     path("user/login/", views.formulario_login, name="login"),
     path("user/logout/", views.logout_user, name="logout"),
     path("loginapp", views.login_app, name="login_app"),
+    path("regeconfiabilidad", views.save_confiabilidad, name="regeconfiabilidad"),
 ]
 
 

@@ -107,7 +107,7 @@ def save_planeacion(request):
                 fuente=origen,
                 contrata=contrata,
                 fecha_programacion=date.today(),
-                estado="PENDIENTE HACER"
+                estado="PENDIENTE CONFIABILIDAD"
             )
             data.save()
             informacion_total = Planeacion.objects.all()
@@ -652,21 +652,6 @@ def save_evaluacion(request):
     return render(request, "evaluacion/listar_evaluacion.html", {"data": data_planeacion, "data_evaluacion": data_evaluacion, "info": False})
 
 
-@login_required
-def list_confiabilidad(request):
-    # Metodo que permite listar en l modulo confiabilidad lo que se encuentra pendiente 
-    data_confiabilidad = Confiabilidad.objects.all()
-    data_pendiente_confiabilidad = Planeacion.objects.filter(estado="PENDIENTE CONFIABILIDAD")
-    return render(request, "confiabilidad/listar_confiabilidad.html", {"data": data_confiabilidad, "pendientes_planeacion": data_pendiente_confiabilidad})
-
-
-@login_required
-def registrar_confiabilidad(request):
-    # Metodo que permite listar las OT que se encuentran en estado PENDIENTE CONFIABILIDAD en el formulario de Confiabilidad.
-    data_pendiente_confiabilidad = Planeacion.objects.filter(estado="PENDIENTE CONFIABILIDAD")
-    return render(request, "confiabilidad/registrar_confiabilidad.html", {"data": data_pendiente_confiabilidad})
-
-
 def formulario_login(request):
     # Metodo que permite direccionar al formulario Login.
     return render(request, "user/login.html")
@@ -693,3 +678,71 @@ def logout_user(request):
     # Metodo que permite cerrar las Sesion que se encuentra activa
     logout(request)
     return redirect("planeacion:login")
+
+
+@login_required
+def list_confiabilidad(request):
+    # Metodo que permite listar en l modulo confiabilidad lo que se encuentra pendiente
+    data_confiabilidad = Confiabilidad.objects.all()
+    data_pendiente_confiabilidad = Planeacion.objects.filter(estado="PENDIENTE CONFIABILIDAD")
+    return render(request, "confiabilidad/listar_confiabilidad.html", {"data": data_confiabilidad, "pendientes_planeacion": data_pendiente_confiabilidad})
+
+
+@login_required
+def registrar_confiabilidad(request):
+    # Metodo que permite listar las OT que se encuentran en estado PENDIENTE CONFIABILIDAD en el formulario de Confiabilidad.
+    data_pendiente_confiabilidad = Planeacion.objects.filter(
+        estado="PENDIENTE CONFIABILIDAD")
+    return render(request, "confiabilidad/registrar_confiabilidad.html", {"data": data_pendiente_confiabilidad})
+
+
+@login_required
+def save_confiabilidad(request):
+    """Metodo que permite guardar la informacion del formulario de confiabilidad"""
+    if request.method == "POST":
+        confiabilidad_OT = request.POST.get("confiabilidad_OT")
+        confiabilidad_tension_a = request.POST.get("confiabilidad_tension_a")
+        confiabilidad_tension_b = request.POST.get("confiabilidad_tension_b")
+        confiabilidad_tension_c = request.POST.get("confiabilidad_tension_c")
+        confiabilidad_promedio_tension = request.POST.get("confiabilidad_promedio_tension")
+        confiabilidad_corrientes_a = request.POST.get("confiabilidad_corrientes_a")
+        confiabilidad_corrientes_b = request.POST.get("confiabilidad_corrientes_b")
+        confiabilidad_corrientes_c = request.POST.get("confiabilidad_corrientes_c")
+        confiabilidad_corrientes_promedio = request.POST.get("confiabilidad_corrientes_promedio")
+        angulo_ia = request.POST.get("angulo_ia")
+        angulo_ib = request.POST.get("angulo_ib")
+        angulo_ic = request.POST.get("angulo_ic")
+        promedio_angulo = request.POST.get("promedio_angulo")
+        fechaHora = request.POST.get("fechaHora")
+        canales = request.POST.get("validacion_canales")
+        formFile = request.FILES.get("formFile")
+        """ Obteniendo el valor principal del Planeacion"""
+        """********************************************************"""
+        OT_FINAL = Planeacion.objects.get(pk=confiabilidad_OT)
+        OT_FINAL.estado = "PENDIENTE HACER"
+        OT_FINAL.save()
+        """********************************************************"""
+        data = Confiabilidad(
+            orden_trabajo=OT_FINAL,
+            valor_tensiones_a=confiabilidad_tension_a,
+            valor_tensiones_b=confiabilidad_tension_b,
+            valor_tensiones_c=confiabilidad_tension_c,
+            promedio_tensiones=confiabilidad_promedio_tension,
+            valor_corrientes_a=confiabilidad_corrientes_a,
+            valor_corrientes_b=confiabilidad_corrientes_b,
+            valor_corrientes_c=confiabilidad_corrientes_c,
+            promedio_corrientes=confiabilidad_corrientes_promedio,
+            angulos_corriente_ia=angulo_ia,
+            angulos_corriente_ib=angulo_ib,
+            angulos_corriente_ic=angulo_ic,
+            sincro_fecha=fechaHora,
+            validacion_canales=canales,
+            cargue_fasorial=formFile,
+            conexionado="INDIRECTA"
+        )
+        data.save()
+        data_confiabilidad = Confiabilidad.objects.all()
+        data_pendiente_confiabilidad = Planeacion.objects.filter(estado="PENDIENTE CONFIABILIDAD")
+        return render(request, "confiabilidad/listar_confiabilidad.html", {"data": data_confiabilidad, "pendientes_planeacion": data_pendiente_confiabilidad})
+    
+    return render(request, "confiabilidad/registrar_confiabilidad.html", {"data": data_pendiente_confiabilidad})

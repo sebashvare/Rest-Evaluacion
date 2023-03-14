@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
-  Registro Eeventos | Evalaucion
+  Registro Eventos | Evalaucion
 {% endblock title %}
 {% block content %}
   <div class="container-fluid">
@@ -173,3 +174,6 @@
     </div>
   </div>
 {% endblock content %}
+{% block javascript %}
+    <script src="{% static 'assets/js/validaciones.js'%}"></script>
+{% endblock javascript %}

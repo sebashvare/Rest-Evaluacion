@@ -16,10 +16,9 @@
               <tr>
                 <th class="text-uppercase text-center">OT</th>
                 <th class="text-uppercase text-center">Fuente</th>
-                <th class="text-uppercase text-center">Valor Corrientes</th>
-                <th class="text-uppercase text-center">contrata</th>
-                <th class="text-uppercase text-center">fecha_programacion</th>
-                <th class="text-uppercase text-center">estado</th>
+                <th class="text-uppercase text-center">Fecha</th>
+                <th class="text-uppercase text-center">Estado</th>
+                <th class="text-uppercase text-center">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -46,10 +45,9 @@
               <tr>
                 <th class="text-uppercase text-center">OT</th>
                 <th class="text-uppercase text-center">Fuente</th>
-                <th class="text-uppercase text-center">Valor Corrientes</th>
-                <th class="text-uppercase text-center">contrata</th>
-                <th class="text-uppercase text-center">fecha_programacion</th>
-                <th class="text-uppercase text-center">estado</th>
+                <th class="text-uppercase text-center">Fecha</th>
+                <th class="text-uppercase text-center">Estado</th>
+                <th class="text-uppercase text-center">Acciones</th>
               </tr>
             </tfoot>
           </table>
@@ -94,8 +92,7 @@
                   </td>
                   {% endif %}
                   <td class="text-capialcase text-center">{{ plan.sincro_fecha }}</td>
-                  <td class="text-capialcase text-center">
-                    <a href="{{ plan.cargue_fasorial.url }}">{{ plan.cargue_fasorial.name }}</a>
+                  <td class="text-capialcase text-center"><a href="{{ plan.cargue_fasorial.url }}">{{ plan.cargue_fasorial.name }}</a>
                 </td>
                 </tr>
                 

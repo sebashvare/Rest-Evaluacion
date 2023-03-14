@@ -18,7 +18,7 @@ class Planeacion(models.Model):
     fuente = models.CharField(max_length=20)
     contrata = models.CharField(max_length=20)
     fecha_programacion = models.DateField()
-    estado = models.CharField(max_length=20)
+    estado = models.CharField(max_length=40)
 
     class Meta:
         verbose_name = 'Planeacion'
@@ -115,8 +115,8 @@ class Confiabilidad(models.Model):
     angulos_corriente_ia = models.DecimalField(("Angulos Corrientes IA"), max_digits=5, decimal_places=2)
     angulos_corriente_ib = models.DecimalField(("Angulos Corrientes IB"), max_digits=5, decimal_places=2)
     angulos_corriente_ic = models.DecimalField(("Angulos Corrientes IC"), max_digits=5, decimal_places=2)
-    sincro_fecha = models.BooleanField(("Sincronizacion Fecha y Hora"))
-    validacion_canales = models.BooleanField(("Validacion Canales"))
+    sincro_fecha = models.CharField(("Sincronizacion Fecha y Hora"), max_length=25)
+    validacion_canales = models.CharField(("Validacion Canales"), max_length=25)
     cargue_fasorial = models.FileField(("Fasorial"), upload_to="fasorial")
     conexionado = models.CharField(("Conexionado"), max_length=15, choices=CONEXIONADO)
     

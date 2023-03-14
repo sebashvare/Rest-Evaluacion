@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block title %} Programador Medida | Evaluacion {%endblock %} {% block content%}
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %} Programador Medida | Evaluacion {%endblock %} {% block content%}
 <div class="container-fluid">
   <h6 class="text-dark text-gray-600 text-uppercase">Programador Medida</h6>
   <small class="form-text1">Rol: Este modulo permite registrar</small>
@@ -67,3 +69,6 @@
   </div>
 </div>
 {% endblock %}
+{% block javascript %}
+    <script src="{% static 'assets/js/validaciones.js'%}"></script>
+{% endblock javascript %}
